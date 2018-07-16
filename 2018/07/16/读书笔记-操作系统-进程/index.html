@@ -7,18 +7,18 @@
   
   <title>进程和线程 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="进程和线程 进程 基本概念  一个进程就是一个正在执行程序的实例，包括程序计数器、寄存器和变量的当前值 在多道程序设计中，进程提供了两个基本抽象： 独立的逻辑控制流，体现对cpu的抽象 私有的地址空间，体现对内存的抽象 个人理解: 操作系统的目的是最大化效益的资源管理，而通过进程的概念可以让我们最大的利用cpu，cpu的效率远大于内存和io设备，通过进程概念可以充分的利用cpu 进程的本质就是享有">
+  <meta name="description" content="进程和线程 ​    进程和线程是操作系统中最重要的概念，最近在看现代操作系统，做简单的学习笔记以加深理解，结合在线课程学习效果更佳！ 进程 基本概念  一个进程就是一个正在执行程序的实例，包括程序计数器、寄存器和变量的当前值 在多道程序设计中，进程提供了两个基本抽象： 独立的逻辑控制流，体现对cpu的抽象 私有的地址空间，体现对内存的抽象   个人理解: 操作系统的目的是最大化效益的资源管理，而">
 <meta name="keywords" content="读书笔记 操作系统">
 <meta property="og:type" content="article">
 <meta property="og:title" content="进程和线程">
 <meta property="og:url" content="http://yoursite.com/2018/07/16/读书笔记-操作系统-进程/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="进程和线程 进程 基本概念  一个进程就是一个正在执行程序的实例，包括程序计数器、寄存器和变量的当前值 在多道程序设计中，进程提供了两个基本抽象： 独立的逻辑控制流，体现对cpu的抽象 私有的地址空间，体现对内存的抽象 个人理解: 操作系统的目的是最大化效益的资源管理，而通过进程的概念可以让我们最大的利用cpu，cpu的效率远大于内存和io设备，通过进程概念可以充分的利用cpu 进程的本质就是享有">
+<meta property="og:description" content="进程和线程 ​    进程和线程是操作系统中最重要的概念，最近在看现代操作系统，做简单的学习笔记以加深理解，结合在线课程学习效果更佳！ 进程 基本概念  一个进程就是一个正在执行程序的实例，包括程序计数器、寄存器和变量的当前值 在多道程序设计中，进程提供了两个基本抽象： 独立的逻辑控制流，体现对cpu的抽象 私有的地址空间，体现对内存的抽象   个人理解: 操作系统的目的是最大化效益的资源管理，而">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-07-16T14:52:34.189Z">
+<meta property="og:updated_time" content="2018-07-16T15:00:30.495Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="进程和线程">
-<meta name="twitter:description" content="进程和线程 进程 基本概念  一个进程就是一个正在执行程序的实例，包括程序计数器、寄存器和变量的当前值 在多道程序设计中，进程提供了两个基本抽象： 独立的逻辑控制流，体现对cpu的抽象 私有的地址空间，体现对内存的抽象 个人理解: 操作系统的目的是最大化效益的资源管理，而通过进程的概念可以让我们最大的利用cpu，cpu的效率远大于内存和io设备，通过进程概念可以充分的利用cpu 进程的本质就是享有">
+<meta name="twitter:description" content="进程和线程 ​    进程和线程是操作系统中最重要的概念，最近在看现代操作系统，做简单的学习笔记以加深理解，结合在线课程学习效果更佳！ 进程 基本概念  一个进程就是一个正在执行程序的实例，包括程序计数器、寄存器和变量的当前值 在多道程序设计中，进程提供了两个基本抽象： 独立的逻辑控制流，体现对cpu的抽象 私有的地址空间，体现对内存的抽象   个人理解: 操作系统的目的是最大化效益的资源管理，而">
   
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -88,84 +88,118 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>进程和线程</p>
+<p>​    进程和线程是操作系统中最重要的概念，最近在看现代操作系统，做简单的学习笔记以加深理解，结合<a href="http://www.icourses.cn/web/sword/portal/shareDetails?&amp;cId=6151#/course/chapter" target="_blank" rel="noopener">在线课程</a>学习效果更佳！</p>
 <p>进程</p>
 <p>基本概念</p>
 <ul>
 <li>一个进程就是一个正在执行程序的实例，包括程序计数器、寄存器和变量的当前值</li>
-<li>在多道程序设计中，进程提供了两个基本抽象：</li>
+<li>在多道程序设计中，进程提供了两个基本抽象：<ul>
 <li>独立的逻辑控制流，体现对cpu的抽象</li>
 <li>私有的地址空间，体现对内存的抽象</li>
-<li>个人理解:</li>
+</ul>
+</li>
+<li>个人理解:<ul>
 <li>操作系统的目的是最大化效益的资源管理，而通过进程的概念可以让我们最大的利用cpu，cpu的效率远大于内存和io设备，通过进程概念可以充分的利用cpu</li>
 <li>进程的本质就是享有独立内存空间的代码块，系统中断(与函数调用区分开)实现了进程的切换，通过保存上下文加系统调用的方式，可以实现并行，在任意的时间点只有一个当前进程</li>
 </ul>
+</li>
+</ul>
 <p>进程的状态和转换的原因</p>
 <p>挂起(suspend)</p>
-<p>suspend是基于swaping技术，根据进程是否被换出内存来决定，又可以分为ready-suspend和blocked-suspend</p>
+<p>​    suspend是基于swaping技术，根据进程是否被换出内存来决定，又可以分为ready-suspend和blocked-suspend</p>
 <p>三种状态</p>
 <ul>
-<li>就绪(ready)  </li>
+<li>就绪(ready)  <ul>
 <li>当前暂时没有cpu分配的进程  </li>
 <li>进程在内存，等待进程调度  </li>
-<li>运行(running)  </li>
+</ul>
+</li>
+<li>运行(running)  <ul>
 <li>进程调度后可能进入ready队列，退出进程，或由于内存等原因进入ready-suspend状态</li>
-<li>阻塞(blocked)  </li>
+</ul>
+</li>
+<li>阻塞(blocked)  <ul>
 <li>进程在内存  </li>
 <li>进程位于event队列，等待事件发生（如io操作等），事件发生后变为ready状态，加入ready队列</li>
 <li>可能存在多个event队列，可以更高效    </li>
 <li>移出内存变为blocked-suspend</li>
 </ul>
+</li>
+</ul>
 <p>五种状态</p>
 <ul>
-<li>开始  </li>
-<li>进入ready、ready-suspend状态</li>
+<li>开始  <ul>
+<li>新进程</li>
+<li>ready-suspend</li>
+</ul>
+</li>
 <li>退出(exit)</li>
 </ul>
 <p>七种状态</p>
 <ul>
-<li>Ready-suspend</li>
+<li>Ready-suspend<ul>
 <li>进程在外存</li>
 <li>只要调入内存即可执行</li>
 <li>换入内存变为ready状态，</li>
-<li>Blocked-suspend</li>
+</ul>
+</li>
+<li>Blocked-suspend<ul>
 <li>进程在外存</li>
 <li>等待事件，事件发生变为ready-suspend，被换入内存变为blocked</li>
 </ul>
+</li>
+</ul>
 <p>线程</p>
 <ul>
-<li>基本概念</li>
+<li>基本概念<ul>
 <li>轻量级进程，多个进程共享cpu、io设备的，拥有自己的独立内存空间，而多个线程共享内存空间</li>
 <li>每个线程拥有自己的寄存器、堆栈空间</li>
 <li>线程不用切换上下文</li>
 </ul>
+</li>
+</ul>
 <p>进程调度算法</p>
 <p>系统分类和调度目标</p>
 <ul>
-<li>批处理系统</li>
+<li>批处理系统<ul>
 <li>吞吐量</li>
 <li>周转时间</li>
 <li>cpu利用率</li>
-<li>分时系统</li>
+</ul>
+</li>
+<li>分时系统<ul>
 <li>响应时间</li>
 <li>均衡性</li>
-<li>实时系统</li>
+</ul>
+</li>
+<li>实时系统<ul>
 <li>满足截止时间</li>
 <li>可预测性</li>
+</ul>
+</li>
 </ul>
 <p>调度算法：</p>
 <p>实际中会各种调度算法搭配使用</p>
 <ul>
-<li>先来先服务  </li>
+<li>先来先服务  <ul>
 <li>按照请求cpu的顺序使用cpu</li>
-<li>轮转调度</li>
+</ul>
+</li>
+<li>轮转调度<ul>
 <li>每个进程分配一个时间片，时间片结束后进程还在运行，就将cpu剥夺并分配给另一个进程，如果提前阻塞或结束，立即分配给下一个进程</li>
 <li>需要合理的分配时间片的长度，一般为20-50ms，太短需要频繁切换进程上下文，太长响应时间过长  </li>
-<li>多级队列</li>
+</ul>
+</li>
+<li>多级队列<ul>
 <li>轮转调度的改进版，不用估算进程使用cpu的时间也可以合理的分配时间片的长度</li>
 <li>使用多级队列，当前时间片未运行完毕的进程，移入下一级队列，下一级队列时间片长度翻倍；</li>
-<li>优先级调度</li>
+</ul>
+</li>
+<li>优先级调度<ul>
 <li>设置多个优先级队列，优先运行优先级高的进程队列</li>
 <li>优先给更需要io的进程</li>
+</ul>
+</li>
 </ul>
 
       
