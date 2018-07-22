@@ -62,6 +62,101 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-http缓存" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/07/22/http缓存/" class="article-date">
+  <time datetime="2018-07-22T08:10:01.000Z" itemprop="datePublished">2018-07-22</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/07/22/http缓存/">http缓存</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="1-简单介绍"><a href="#1-简单介绍" class="headerlink" title="1.简单介绍"></a>1.简单介绍</h4><p>​    为什么要学习http缓存？看过很多前端优化的文章、例子和方案，总体来说从浏览器角度来讲，技术上能做的无非是资源的加载和渲染，而http缓存是优化资源加载中很重要的一点；另一方面来说，前端构建工具中的打包、chunkhash的处理，也要充分利用缓存的特性，减少请求次数；</p>
+<p>​    在了解缓存之前，推荐先从缓存的局部性原理入手，了解操作系统的多级存储体系、TLB等知识，再回头来看http缓存，会容易很多。</p>
+<p>​    http缓存可以分为强缓存和协商缓存，从请求资源的角度讲，可以分为以下几种情况：</p>
+<ul>
+<li><p>前端利用本地存储，减少部分请求，如列表页缓存ajax请求、app端的增量更新</p>
+</li>
+<li><p>请求资源后被强缓存命中，如网站的静态资源</p>
+</li>
+<li><p>请求资源后命中协商缓存，若资源未过期则使用本地资源并更新日期，若过期则返回新的资源</p>
+</li>
+<li><p>使用no-cache，如网站中的html页面</p>
+<p>其中强缓存和协商缓存是做缓存优化的主要方面，下文会主要介绍这两点。</p>
+</li>
+</ul>
+<h4 id="2-http有关缓存字段"><a href="#2-http有关缓存字段" class="headerlink" title="2.http有关缓存字段"></a>2.http有关缓存字段</h4><ul>
+<li>cache-control:http协议中的通用请求头部，在请求报文和响应报文中均可使用，表示操作缓存的机制，在请求和响应中略有不同，常见取值如下：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public:响应报文中常见，表示可以向任意方提供响应的缓存</span><br><span class="line">privite:仅向特定用户返回缓存</span><br><span class="line">no-cache:不缓存过期资源，并不是不缓存</span><br><span class="line">	1.请求报文中表示强制向服务器请求，类似浏览器刷新机制，不接受缓存服务器缓存过的响应</span><br><span class="line">	2.响应报文中表示缓存服务器不能缓存该资源，</span><br><span class="line">no-store:不缓存请求或响应中的任何资源</span><br><span class="line">max-age:资源缓存的最大时间，基于当前时间的以s未单位的相对时间</span><br></pre></td></tr></table></figure>
+<h4 id="3-强缓存"><a href="#3-强缓存" class="headerlink" title="3.强缓存"></a>3.强缓存</h4><p>表示缓存命中且未过期，此时不会重新发送网络请求</p>
+<ul>
+<li><p>Expires：实体首部字段</p>
+<p>http1.0的标准，值为1个utc标准的绝对时间(Date.toUTCString());</p>
+</li>
+<li><p>max-age</p>
+<p>http1.1的标准，值为1个以s为单位的相对时间</p>
+</li>
+<li><p>区别</p>
+<ul>
+<li>max-age优先级更高，二者同时存在以max-age为准</li>
+<li>时间单位不同</li>
+</ul>
+</li>
+</ul>
+<h4 id="4-协商缓存"><a href="#4-协商缓存" class="headerlink" title="4.协商缓存"></a>4.协商缓存</h4><p>表示缓存命中但过期了，需要重新发送请求向服务器确认，如果未修改，则返回304状态码，不用返回资源，浏览器使用缓存即可；如果此时资源已经变化，则返回新的资源，返回200状态码；</p>
+<ul>
+<li><p>if-modified-since ： 请求首部字段，用于确认资源有效期</p>
+<p>1.http1.0标准，值为utc时间</p>
+<p>2.Last-Modified是资源最后一次更改时间，获无期会在上一次请求资源时返回，在下一次加载资源的请求中，将该值放入If-Modified-Since中，服务器接收到请求后进行对比，根据结果返回304或新的资源</p>
+</li>
+<li><p>ETag ： 响应首部字段，以字符串性质为每个资源分配唯一标识，</p>
+<p>1.http1.1标准，资源发生更新时该值也会随之更新</p>
+<p>2.上一次加载资源时，服务器将该资源的ETag值返回作为标识，在下一次加载的资源的请求中，将该值放入If-None-Match中，服务器接收到if-None-Match的值后进行对比，然后根据对比结果返回304或新的资源</p>
+</li>
+<li><p>区别</p>
+<ul>
+<li>ETag优先级更高，二者同时存在以ETag值为准</li>
+</ul>
+</li>
+</ul>
+<h4 id="5-区别"><a href="#5-区别" class="headerlink" title="5.区别"></a>5.区别</h4><ul>
+<li>都表示缓存命中，强缓存未过期，协商缓存已过期</li>
+<li>强缓存不会发送网络请求，直接使用浏览器缓存，协商缓存会发送请求向服务器确认</li>
+</ul>
+<h4 id="6-怎么用"><a href="#6-怎么用" class="headerlink" title="6.怎么用"></a>6.怎么用</h4><ul>
+<li>在使用构建工具中，一般都会提取公用的基础库打包为vendor文件等，一般这些文件是长期稳定的，根据内容生成chunkhash后，可以设置较长的过期时间，避免用户的重复请求；</li>
+<li>网站的业务代码，一般根据页面单独打包，因为业务变动较大，可以每次构建后添加新的hash或根据内容生成新的hash</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/07/22/http缓存/" data-id="cjjwm6pdm00001irgfyn65qiw" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/http-缓存/">http 缓存</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-前端知识图谱" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/07/16/前端知识图谱/" class="article-date">
@@ -568,7 +663,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/07/16/前端知识图谱/" data-id="cjjog3ixj0001usrgoxex7y2p" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/07/16/前端知识图谱/" data-id="cjjwm6pds00011irg0tzkcuiw" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前端-知识点总结/">前端 知识点总结</a></li></ul>
@@ -721,7 +816,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/07/16/读书笔记-操作系统-进程/" data-id="cjjog3ixm0002usrg800wvnel" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/07/16/读书笔记-操作系统-进程/" data-id="cjjwm6pdz00041irgodgo6j4a" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/读书笔记-操作系统/">读书笔记 操作系统</a></li></ul>
@@ -768,7 +863,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/07/16/hello-world/" data-id="cjjog3ixe0000usrg6slh2gwv" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/07/16/hello-world/" data-id="cjjwm6pdx00031irgkqxeryus" class="article-share-link">Share</a>
       
       
     </footer>
@@ -791,7 +886,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端-知识点总结/">前端 知识点总结</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/读书笔记-操作系统/">读书笔记 操作系统</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/http-缓存/">http 缓存</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端-知识点总结/">前端 知识点总结</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/读书笔记-操作系统/">读书笔记 操作系统</a></li></ul>
     </div>
   </div>
 
@@ -801,7 +896,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/前端-知识点总结/" style="font-size: 10px;">前端 知识点总结</a> <a href="/tags/读书笔记-操作系统/" style="font-size: 10px;">读书笔记 操作系统</a>
+      <a href="/tags/http-缓存/" style="font-size: 10px;">http 缓存</a> <a href="/tags/前端-知识点总结/" style="font-size: 10px;">前端 知识点总结</a> <a href="/tags/读书笔记-操作系统/" style="font-size: 10px;">读书笔记 操作系统</a>
     </div>
   </div>
 
@@ -821,6 +916,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2018/07/22/http缓存/">http缓存</a>
+          </li>
         
           <li>
             <a href="/2018/07/16/前端知识图谱/">前端知识图谱</a>
