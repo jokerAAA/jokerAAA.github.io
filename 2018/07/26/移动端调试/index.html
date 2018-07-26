@@ -7,18 +7,18 @@
   
   <title>移动端调试 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="移动端调试工具​    本文将简单介绍几款移动端调试的工具，使用较为简单，都有可视化界面，就不详细展开了。 抓包工具​    抓包工具是移动端调试的通用工具，不论是native还是H5均适用。常见的抓包工具有fiddler、charles，还有部分基于nodejs开发的跨平台的抓包工具。  基本使用：  确保移动设备和pc在同一局域网，查看pc的ip地址和抓包工具的端口号   设置移动设备的代理地">
+  <meta name="description" content="移动端调试工具​    本文将简单介绍几款移动端调试的工具，使用较为简单，都有可视化界面，就不详细展开了。 抓包工具​    抓包工具是移动端调试的通用工具，不论是native还是H5均适用。常见的抓包工具有fiddler、charles，还有部分基于nodejs开发的跨平台的抓包工具。  基本使用： 确保移动设备和pc在同一局域网，查看pc的ip地址和抓包工具的端口号   设置移动设备的代理地址">
 <meta name="keywords" content="移动端 调试工具">
 <meta property="og:type" content="article">
 <meta property="og:title" content="移动端调试">
 <meta property="og:url" content="http://yoursite.com/2018/07/26/移动端调试/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="移动端调试工具​    本文将简单介绍几款移动端调试的工具，使用较为简单，都有可视化界面，就不详细展开了。 抓包工具​    抓包工具是移动端调试的通用工具，不论是native还是H5均适用。常见的抓包工具有fiddler、charles，还有部分基于nodejs开发的跨平台的抓包工具。  基本使用：  确保移动设备和pc在同一局域网，查看pc的ip地址和抓包工具的端口号   设置移动设备的代理地">
+<meta property="og:description" content="移动端调试工具​    本文将简单介绍几款移动端调试的工具，使用较为简单，都有可视化界面，就不详细展开了。 抓包工具​    抓包工具是移动端调试的通用工具，不论是native还是H5均适用。常见的抓包工具有fiddler、charles，还有部分基于nodejs开发的跨平台的抓包工具。  基本使用： 确保移动设备和pc在同一局域网，查看pc的ip地址和抓包工具的端口号   设置移动设备的代理地址">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-07-26T14:34:16.214Z">
+<meta property="og:updated_time" content="2018-07-26T15:10:40.122Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="移动端调试">
-<meta name="twitter:description" content="移动端调试工具​    本文将简单介绍几款移动端调试的工具，使用较为简单，都有可视化界面，就不详细展开了。 抓包工具​    抓包工具是移动端调试的通用工具，不论是native还是H5均适用。常见的抓包工具有fiddler、charles，还有部分基于nodejs开发的跨平台的抓包工具。  基本使用：  确保移动设备和pc在同一局域网，查看pc的ip地址和抓包工具的端口号   设置移动设备的代理地">
+<meta name="twitter:description" content="移动端调试工具​    本文将简单介绍几款移动端调试的工具，使用较为简单，都有可视化界面，就不详细展开了。 抓包工具​    抓包工具是移动端调试的通用工具，不论是native还是H5均适用。常见的抓包工具有fiddler、charles，还有部分基于nodejs开发的跨平台的抓包工具。  基本使用： 确保移动设备和pc在同一局域网，查看pc的ip地址和抓包工具的端口号   设置移动设备的代理地址">
   
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -90,21 +90,20 @@
         <h1 id="移动端调试工具"><a href="#移动端调试工具" class="headerlink" title="移动端调试工具"></a>移动端调试工具</h1><p>​    本文将简单介绍几款移动端调试的工具，使用较为简单，都有可视化界面，就不详细展开了。</p>
 <h2 id="抓包工具"><a href="#抓包工具" class="headerlink" title="抓包工具"></a>抓包工具</h2><p>​    抓包工具是移动端调试的通用工具，不论是native还是H5均适用。常见的抓包工具有fiddler、charles，还有部分基于nodejs开发的跨平台的抓包工具。</p>
 <ul>
-<li><p>基本使用：</p>
-<ul>
+<li>基本使用：<ul>
 <li>确保移动设备和pc在同一局域网，查看pc的ip地址和抓包工具的端口号  </li>
 <li>设置移动设备的代理地址  </li>
 <li>https需要额外安装证书  </li>
 </ul>
 </li>
-<li><p>过滤、限速</p>
-<ul>
+<li>过滤、限速<ul>
 <li>过滤查看对应抓包工具的fillter即可  </li>
 <li>限速相关查看throttling设置</li>
 </ul>
 </li>
-<li><p>其他</p>
-<p>待补充</p>
+<li>其他<ul>
+<li>charles在windows和mac上均可使用，fiddler只有windows版本</li>
+</ul>
 </li>
 </ul>
 <h2 id="hybrid调试工具"><a href="#hybrid调试工具" class="headerlink" title="hybrid调试工具"></a>hybrid调试工具</h2><p>​    开发hybrid应用时，使用chorme调试更加方便，对比抓包工具来说，不知能查看网络相关，更有控制台、样式等，可以灵活调试；</p>
