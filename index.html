@@ -62,6 +62,66 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-cookie" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/07/26/cookie/" class="article-date">
+  <time datetime="2018-07-26T14:36:07.000Z" itemprop="datePublished">2018-07-26</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/07/26/cookie/">cookie</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="cookie"><a href="#cookie" class="headerlink" title="cookie"></a>cookie</h2><h4 id="简单介绍"><a href="#简单介绍" class="headerlink" title="简单介绍"></a>简单介绍</h4><p>​    为什么介绍cookie？因为很多人在面试过程中，都会肯定的告诉我cookie是用来存数据的，感觉很多初学者都有一定的误区，所以翻了一篇去年的笔记出来，稍微改了一下介绍，就当复习吧；从另一个角度来说，cookie和缓存本来就是http协议中的重要部分，是一定要搞清楚的部分。</p>
+<p>​    cookie是1个请求首部，含有先前由服务器通过set-cookie首部投放并存储到客户端的http cookies。在浏览器的隐私设置中可以禁用cookie。</p>
+<p>​    cookie的主要作用，或者说唯一的作用，就是标识用户。因为http协议是无状态的，并没有定义如何去标识用户，而客户端存储在html5中才被纳入标准，cookie就是对标识用户的一个折中方案。在这个方案中，服务器通过set-cookie的方式对客户端设置唯一的标识，而客户端在后续的请求中都会携带这个标识，通过这种方式实现了http协议的有状态。</p>
+<p>​    cookie本质是一个过渡方案，因为cookie伴随同域携带的特性，所以在当前域名存在很多的静态资源时，cookie其实是一种负担；而且server还要通过redis等存储cookie，也是额外的负担；而且cookie带来了csrf这种问题。个人观点是app端采用的token方案更合理。</p>
+<h4 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h4><p>cookie:name=value; name1=value1; name2=value2</p>
+<ul>
+<li>一系列的键值对，通过;和空格符隔开</li>
+<li>cookie的值必须不包含逗号，分号和空格符</li>
+</ul>
+<h4 id="浏览器api"><a href="#浏览器api" class="headerlink" title="浏览器api"></a>浏览器api</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">document.cookie = &apos;key=value&apos;;</span><br><span class="line">document.cookie = &apos;name=value&apos;;</span><br><span class="line">//此时的cookie为&apos;key=value; name=value&apos;</span><br></pre></td></tr></table></figure>
+<h4 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h4><ul>
+<li>path:决定cookie的路径，默认为当前</li>
+<li>domain：决定cookie的域名，默认为当前文档位置</li>
+<li>max-age：单位为s,表示以当前时间为基准的过期时间，设置为0则清除cookie</li>
+<li>expires：未设置时时临时cookie，设置后为持久cookie，是1个绝对时间单位，表示到期时间</li>
+<li>secure：只通过https协议传输</li>
+<li>httponly：只在http中携带，无法被js获取和修改</li>
+</ul>
+<h4 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h4><ul>
+<li>cookie一旦设置后只能通过设置有效期来清除cookie</li>
+<li>详细使用参考mdn即可</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/07/26/cookie/" data-id="cjk2oq5nq0000k8rgixlamswk" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cookie-http协议/">cookie http协议</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-移动端调试" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/07/26/移动端调试/" class="article-date">
@@ -142,7 +202,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/07/26/移动端调试/" data-id="cjk2nsscs0005e4rg9goqc10n" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/07/26/移动端调试/" data-id="cjk2oq5o40008k8rgd59tjzhq" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/移动端-调试工具/">移动端 调试工具</a></li></ul>
@@ -246,7 +306,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/07/26/移动端css技巧/" data-id="cjk2nsscr0004e4rgz54a0l0i" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/07/26/移动端css技巧/" data-id="cjk2oq5o20005k8rgfyhlcto9" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/移动端-css/">移动端 css</a></li></ul>
@@ -341,7 +401,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/07/22/http缓存/" data-id="cjk2nssck0001e4rgtdzvzuvh" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/07/22/http缓存/" data-id="cjk2oq5nz0003k8rgbte3dfx4" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/http-缓存/">http 缓存</a></li></ul>
@@ -859,7 +919,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/07/16/前端知识图谱/" data-id="cjk2nsscn0002e4rg7odmph1j" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/07/16/前端知识图谱/" data-id="cjk2oq5o00004k8rgfom2j5ff" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前端-知识点总结/">前端 知识点总结</a></li></ul>
@@ -1012,7 +1072,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/07/16/读书笔记-操作系统-进程/" data-id="cjk2nsscu0006e4rg33stt9jg" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/07/16/读书笔记-操作系统-进程/" data-id="cjk2oq5o60009k8rg16s8xr30" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/读书笔记-操作系统/">读书笔记 操作系统</a></li></ul>
@@ -1059,7 +1119,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/07/16/hello-world/" data-id="cjk2nsscg0000e4rgjrclzmqp" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/07/16/hello-world/" data-id="cjk2oq5nu0001k8rg45o09rkr" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1082,7 +1142,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/http-缓存/">http 缓存</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端-知识点总结/">前端 知识点总结</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/移动端-css/">移动端 css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/移动端-调试工具/">移动端 调试工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/读书笔记-操作系统/">读书笔记 操作系统</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/cookie-http协议/">cookie http协议</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http-缓存/">http 缓存</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端-知识点总结/">前端 知识点总结</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/移动端-css/">移动端 css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/移动端-调试工具/">移动端 调试工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/读书笔记-操作系统/">读书笔记 操作系统</a></li></ul>
     </div>
   </div>
 
@@ -1092,7 +1152,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/http-缓存/" style="font-size: 10px;">http 缓存</a> <a href="/tags/前端-知识点总结/" style="font-size: 10px;">前端 知识点总结</a> <a href="/tags/移动端-css/" style="font-size: 10px;">移动端 css</a> <a href="/tags/移动端-调试工具/" style="font-size: 10px;">移动端 调试工具</a> <a href="/tags/读书笔记-操作系统/" style="font-size: 10px;">读书笔记 操作系统</a>
+      <a href="/tags/cookie-http协议/" style="font-size: 10px;">cookie http协议</a> <a href="/tags/http-缓存/" style="font-size: 10px;">http 缓存</a> <a href="/tags/前端-知识点总结/" style="font-size: 10px;">前端 知识点总结</a> <a href="/tags/移动端-css/" style="font-size: 10px;">移动端 css</a> <a href="/tags/移动端-调试工具/" style="font-size: 10px;">移动端 调试工具</a> <a href="/tags/读书笔记-操作系统/" style="font-size: 10px;">读书笔记 操作系统</a>
     </div>
   </div>
 
@@ -1114,6 +1174,10 @@
       <ul>
         
           <li>
+            <a href="/2018/07/26/cookie/">cookie</a>
+          </li>
+        
+          <li>
             <a href="/2018/07/26/移动端调试/">移动端调试</a>
           </li>
         
@@ -1127,10 +1191,6 @@
         
           <li>
             <a href="/2018/07/16/前端知识图谱/">前端知识图谱</a>
-          </li>
-        
-          <li>
-            <a href="/2018/07/16/读书笔记-操作系统-进程/">进程和线程</a>
           </li>
         
       </ul>
