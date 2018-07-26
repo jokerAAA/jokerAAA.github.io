@@ -8,14 +8,14 @@
   <title>进程和线程 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="进程和线程 ​    进程和线程是操作系统中最重要的概念，最近在看现代操作系统，做简单的学习笔记以加深理解，结合在线课程学习效果更佳！ ​    进程通信、饥渴、锁的内容随后单独介绍。 进程 基本概念  一个进程就是一个正在执行程序的实例，包括程序计数器、寄存器和变量的当前值 在多道程序设计中，进程提供了两个基本抽象： 独立的逻辑控制流，体现对cpu的抽象 私有的地址空间，体现对内存的抽象   个">
-<meta name="keywords" content="读书笔记 操作系统">
+<meta name="keywords" content="操作系统 进程和线程">
 <meta property="og:type" content="article">
 <meta property="og:title" content="进程和线程">
 <meta property="og:url" content="http://yoursite.com/2018/07/16/读书笔记-操作系统-进程/index.html">
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="进程和线程 ​    进程和线程是操作系统中最重要的概念，最近在看现代操作系统，做简单的学习笔记以加深理解，结合在线课程学习效果更佳！ ​    进程通信、饥渴、锁的内容随后单独介绍。 进程 基本概念  一个进程就是一个正在执行程序的实例，包括程序计数器、寄存器和变量的当前值 在多道程序设计中，进程提供了两个基本抽象： 独立的逻辑控制流，体现对cpu的抽象 私有的地址空间，体现对内存的抽象   个">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-07-16T15:03:12.868Z">
+<meta property="og:updated_time" content="2018-07-26T15:12:44.437Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="进程和线程">
 <meta name="twitter:description" content="进程和线程 ​    进程和线程是操作系统中最重要的概念，最近在看现代操作系统，做简单的学习笔记以加深理解，结合在线课程学习效果更佳！ ​    进程通信、饥渴、锁的内容随后单独介绍。 进程 基本概念  一个进程就是一个正在执行程序的实例，包括程序计数器、寄存器和变量的当前值 在多道程序设计中，进程提供了两个基本抽象： 独立的逻辑控制流，体现对cpu的抽象 私有的地址空间，体现对内存的抽象   个">
@@ -209,7 +209,7 @@
       <a data-url="http://yoursite.com/2018/07/16/读书笔记-操作系统-进程/" data-id="cjk2oq5o60009k8rg16s8xr30" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/读书笔记-操作系统/">读书笔记 操作系统</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/操作系统-进程和线程/">操作系统 进程和线程</a></li></ul>
 
     </footer>
   </div>
@@ -248,7 +248,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/cookie-http协议/">cookie http协议</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http-缓存/">http 缓存</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端-知识点总结/">前端 知识点总结</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/移动端-css/">移动端 css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/移动端-调试工具/">移动端 调试工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/读书笔记-操作系统/">读书笔记 操作系统</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/http协议-cookie/">http协议 cookie</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http协议-缓存/">http协议 缓存</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/操作系统-进程和线程/">操作系统 进程和线程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/知识点总结-前端/">知识点总结 前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/移动端-css/">移动端 css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/移动端-调试工具/">移动端 调试工具</a></li></ul>
     </div>
   </div>
 
@@ -258,7 +258,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/cookie-http协议/" style="font-size: 10px;">cookie http协议</a> <a href="/tags/http-缓存/" style="font-size: 10px;">http 缓存</a> <a href="/tags/前端-知识点总结/" style="font-size: 10px;">前端 知识点总结</a> <a href="/tags/移动端-css/" style="font-size: 10px;">移动端 css</a> <a href="/tags/移动端-调试工具/" style="font-size: 10px;">移动端 调试工具</a> <a href="/tags/读书笔记-操作系统/" style="font-size: 10px;">读书笔记 操作系统</a>
+      <a href="/tags/http协议-cookie/" style="font-size: 10px;">http协议 cookie</a> <a href="/tags/http协议-缓存/" style="font-size: 10px;">http协议 缓存</a> <a href="/tags/操作系统-进程和线程/" style="font-size: 10px;">操作系统 进程和线程</a> <a href="/tags/知识点总结-前端/" style="font-size: 10px;">知识点总结 前端</a> <a href="/tags/移动端-css/" style="font-size: 10px;">移动端 css</a> <a href="/tags/移动端-调试工具/" style="font-size: 10px;">移动端 调试工具</a>
     </div>
   </div>
 
