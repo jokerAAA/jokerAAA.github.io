@@ -62,6 +62,110 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-移动端css技巧" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/07/26/移动端css技巧/" class="article-date">
+  <time datetime="2018-07-26T13:57:18.000Z" itemprop="datePublished">2018-07-26</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/07/26/移动端css技巧/">移动端css技巧</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="一些小技巧（持续更新中）"><a href="#一些小技巧（持续更新中）" class="headerlink" title="一些小技巧（持续更新中）"></a>一些小技巧（持续更新中）</h2><ul>
+<li><p>单行文字超出显示省略号：text-overflow:ecllipse;overflow:hidden;white-space:nowrap;</p>
+</li>
+<li><p>两行文字超出显示省略号：如果需要居中，添加一层标签即可。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">display</span><span class="selector-pseudo">:-webkit-box</span>;</span><br><span class="line">-webkit-line-clamp:2; //现在在块元素内部显示文本的行数；</span><br><span class="line">-webkit-box-orient:vertical;  //规定子元素应该被水平或垂直排列；</span><br><span class="line"><span class="selector-tag">overflow</span><span class="selector-pseudo">:hidden</span>;</span><br><span class="line"><span class="selector-tag">text-overflow</span><span class="selector-pseudo">:ellipsis</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>rem单位一些问题</p>
+<ul>
+<li>在有边框的元素中，使用rem可能在部分机型上无法显示，使用px做边框单位同时使用lineheight做垂直居中时可能不准  </li>
+<li>一般不推荐使用rem做字体单位，但是使用rem做元素单位，使用px作字体单位时，在一些小屏如iphone5上可能出现换行的现象</li>
+<li>rem使用媒体查询的方式来实现时，可能会漏掉部分非常规屏幕的手机</li>
+</ul>
+</li>
+<li><p>label元素在ios和安卓上表现不一致，存在事件是否冒泡的区别，具体使用时注意即可；</p>
+</li>
+<li><p>局部滚动和iscroll</p>
+<ul>
+<li>在ios上使用局部滚动会卡顿，添加-webkit-overflow-scrolling属性，会有额外bug</li>
+<li>iscroll5滚动流畅，偶尔出现底部无法上拉情况。</li>
+<li>一般不推荐局部滚动，在hybridApp中，使用局部滚动时，native的下拉刷新会受到影响，除某些特殊页面设计外，普通页面推荐尽量拉深页面</li>
+</ul>
+</li>
+<li><p>遮罩层滚动：在移动端使用弹窗时会出现遮罩层跟随滚动的情况</p>
+<ul>
+<li><p>在mask上阻止touchmove事件的冒泡，常用方案，但是一直未生效</p>
+</li>
+<li><p>弹出遮罩层时给container添加如下属性</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">overflow</span><span class="selector-pseudo">:hidden</span>;</span><br><span class="line"><span class="selector-tag">position</span><span class="selector-pseudo">:fixed</span>;</span><br><span class="line"><span class="selector-tag">top</span><span class="selector-pseudo">:0</span>;</span><br><span class="line"><span class="selector-tag">left</span><span class="selector-pseudo">:0</span>;</span><br><span class="line"><span class="selector-tag">width</span><span class="selector-pseudo">:100</span>%;</span><br><span class="line"><span class="selector-tag">height</span><span class="selector-pseudo">:100</span>%;</span><br></pre></td></tr></table></figure>
+<p>上述方法在小程序中有莫名其妙的上拉的bug，原因未知；</p>
+</li>
+</ul>
+</li>
+<li><p>ios上readonly会出现光标，在input上添加 unselectable=”on” onfocus=”this.blur()” 即可；安卓表现正常;</p>
+</li>
+<li><p>ios上div等标签注册事件会失效，添加cursor:pointer可以生效</p>
+</li>
+<li><p>关闭自动填充：autocomplete=off，直接添加在input上即可</p>
+</li>
+<li><p>启用定时器如果出现误差，可以先计算与服务器上的时间差，注意本地/测试/线上服务器的时间差和时区设置；ios如果定时器在后台不运行，可以通过worker来解决，worker会单独开启线程；</p>
+</li>
+<li><p>使用弹性盒布模型布局的方案：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">display:webkit-box;//早期版本</span><br><span class="line">display:-webkit-box-flex;过度版本</span><br><span class="line">display:-webkit-flex:最新版本</span><br><span class="line">display:flex;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>z-index会受到transform和opacity的影响，本质是transform会生成合成层，位于普通层级之上，解决方案 是取消transform属性，或者设置transformZ属性；</p>
+</li>
+<li><p>contenteditable:html5新增属性，兼容ie，给元素添加后元素变为可编辑，取代textarea，其中的内容可以添加各种样式；</p>
+</li>
+<li><p>img等inline-block等元素自带空白，解决方案：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">img</span> &#123;<span class="attribute">display</span>:block;&#125;</span><br><span class="line"><span class="selector-tag">img</span>&#123;<span class="attribute">vertical-align</span>:top;&#125;</span><br><span class="line"><span class="selector-tag">img</span>&#123;<span class="attribute">float</span>:left;&#125;</span><br><span class="line"><span class="selector-tag">parent</span>&#123;<span class="attribute">font-size</span>:<span class="number">0px</span>;&#125;</span><br><span class="line">本质原因是<span class="selector-tag">html</span>元素中空格引起的空白，所以在<span class="selector-tag">html</span>中去除空格页可以；</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="webkit特性"><a href="#webkit特性" class="headerlink" title="webkit特性"></a>webkit特性</h2><ul>
+<li><p>-webkit-appearance：none；取消默认input边框，结合border-radius：0来使用</p>
+</li>
+<li><p>element::-webkit-scroll-bar：{display：none}；取消滚动条</p>
+</li>
+<li><p>-webkit-overflow-scrolling : touch;</p>
+<p>在ios上使用局部滚动时，会出现卡顿的现象，添加该属性会让局部滚动变流畅，也会带来别的bug，目前已知的有屏幕可拖动、input偶尔异常等</p>
+</li>
+<li><p>-webkit-tap-highlight-color:点击高亮色，设置为rgba色，透明度为0时消失</p>
+</li>
+<li><p>禁止用户选中文字：-webkit-user-select:none；</p>
+</li>
+<li><p>placeholder元素样式修改：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">input</span><span class="selector-pseudo">::-webkit-input-placeholder</span>&#123;<span class="attribute">color</span>:red;&#125;</span><br><span class="line"><span class="selector-tag">input</span><span class="selector-pseudo">:focus</span><span class="selector-pseudo">::-webkit-input-placeholder</span>&#123;<span class="attribute">color</span>:green;</span><br></pre></td></tr></table></figure></li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/07/26/移动端css技巧/" data-id="cjk2mjc9t000258rgthb6xp9c" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/移动端-css/">移动端 css</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-http缓存" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/07/22/http缓存/" class="article-date">
@@ -145,7 +249,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/07/22/http缓存/" data-id="cjjwm6pdm00001irgfyn65qiw" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/07/22/http缓存/" data-id="cjk2mjc9r000158rg48km2ur6" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/http-缓存/">http 缓存</a></li></ul>
@@ -663,7 +767,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/07/16/前端知识图谱/" data-id="cjjwm6pds00011irg0tzkcuiw" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/07/16/前端知识图谱/" data-id="cjk2mjc9x000458rgwaspeenz" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前端-知识点总结/">前端 知识点总结</a></li></ul>
@@ -816,7 +920,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/07/16/读书笔记-操作系统-进程/" data-id="cjjwm6pdz00041irgodgo6j4a" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/07/16/读书笔记-操作系统-进程/" data-id="cjk2mjc9z000558rgmk70jl9k" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/读书笔记-操作系统/">读书笔记 操作系统</a></li></ul>
@@ -863,7 +967,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/07/16/hello-world/" data-id="cjjwm6pdx00031irgkqxeryus" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/07/16/hello-world/" data-id="cjk2mjc9m000058rgc0zlrggk" class="article-share-link">Share</a>
       
       
     </footer>
@@ -886,7 +990,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/http-缓存/">http 缓存</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端-知识点总结/">前端 知识点总结</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/读书笔记-操作系统/">读书笔记 操作系统</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/http-缓存/">http 缓存</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端-知识点总结/">前端 知识点总结</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/移动端-css/">移动端 css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/读书笔记-操作系统/">读书笔记 操作系统</a></li></ul>
     </div>
   </div>
 
@@ -896,7 +1000,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/http-缓存/" style="font-size: 10px;">http 缓存</a> <a href="/tags/前端-知识点总结/" style="font-size: 10px;">前端 知识点总结</a> <a href="/tags/读书笔记-操作系统/" style="font-size: 10px;">读书笔记 操作系统</a>
+      <a href="/tags/http-缓存/" style="font-size: 10px;">http 缓存</a> <a href="/tags/前端-知识点总结/" style="font-size: 10px;">前端 知识点总结</a> <a href="/tags/移动端-css/" style="font-size: 10px;">移动端 css</a> <a href="/tags/读书笔记-操作系统/" style="font-size: 10px;">读书笔记 操作系统</a>
     </div>
   </div>
 
@@ -916,6 +1020,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2018/07/26/移动端css技巧/">移动端css技巧</a>
+          </li>
         
           <li>
             <a href="/2018/07/22/http缓存/">http缓存</a>
