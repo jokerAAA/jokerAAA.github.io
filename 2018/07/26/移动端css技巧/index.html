@@ -15,7 +15,7 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="一些小技巧（持续更新中） 单行文字超出显示省略号：text-overflow:ecllipse;overflow:hidden;white-space:nowrap;  两行文字超出显示省略号：如果需要居中，添加一层标签即可。 12345display:-webkit-box;-webkit-line-clamp:2; //现在在块元素内部显示文本的行数；-webkit-box-orient:ve">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-07-26T13:58:49.314Z">
+<meta property="og:updated_time" content="2018-08-01T13:05:10.009Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="移动端css技巧">
 <meta name="twitter:description" content="一些小技巧（持续更新中） 单行文字超出显示省略号：text-overflow:ecllipse;overflow:hidden;white-space:nowrap;  两行文字超出显示省略号：如果需要居中，添加一层标签即可。 12345display:-webkit-box;-webkit-line-clamp:2; //现在在块元素内部显示文本的行数；-webkit-box-orient:ve">
@@ -109,6 +109,8 @@
 <li>一般不推荐局部滚动，在hybridApp中，使用局部滚动时，native的下拉刷新会受到影响，除某些特殊页面设计外，普通页面推荐尽量拉深页面</li>
 </ul>
 </li>
+<li><p>使用overflow：auto时会出现滚动条，可以通过设置overflow-x:hidden;overflow-y:auto;和隐藏滚动条来实现</p>
+</li>
 <li><p>遮罩层滚动：在移动端使用弹窗时会出现遮罩层跟随滚动的情况</p>
 <ul>
 <li><p>在mask上阻止touchmove事件的冒泡，常用方案，但是一直未生效</p>
@@ -199,7 +201,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/http协议-cookie/">http协议 cookie</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http协议-缓存/">http协议 缓存</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/操作系统-进程和线程/">操作系统 进程和线程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/知识点总结-前端/">知识点总结 前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/移动端-css/">移动端 css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/移动端-调试工具/">移动端 调试工具</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/http协议-cookie/">http协议 cookie</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http协议-缓存/">http协议 缓存</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端-知识点总结/">前端 知识点总结</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/操作系统-进程和线程/">操作系统 进程和线程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/移动端-css/">移动端 css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/移动端-调试工具/">移动端 调试工具</a></li></ul>
     </div>
   </div>
 
@@ -209,7 +211,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/http协议-cookie/" style="font-size: 10px;">http协议 cookie</a> <a href="/tags/http协议-缓存/" style="font-size: 10px;">http协议 缓存</a> <a href="/tags/操作系统-进程和线程/" style="font-size: 10px;">操作系统 进程和线程</a> <a href="/tags/知识点总结-前端/" style="font-size: 10px;">知识点总结 前端</a> <a href="/tags/移动端-css/" style="font-size: 10px;">移动端 css</a> <a href="/tags/移动端-调试工具/" style="font-size: 10px;">移动端 调试工具</a>
+      <a href="/tags/http协议-cookie/" style="font-size: 10px;">http协议 cookie</a> <a href="/tags/http协议-缓存/" style="font-size: 10px;">http协议 缓存</a> <a href="/tags/前端-知识点总结/" style="font-size: 10px;">前端 知识点总结</a> <a href="/tags/操作系统-进程和线程/" style="font-size: 10px;">操作系统 进程和线程</a> <a href="/tags/移动端-css/" style="font-size: 10px;">移动端 css</a> <a href="/tags/移动端-调试工具/" style="font-size: 10px;">移动端 调试工具</a>
     </div>
   </div>
 
