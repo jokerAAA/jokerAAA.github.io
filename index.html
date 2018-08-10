@@ -62,6 +62,161 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-webpack" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/08/10/webpack/" class="article-date">
+  <time datetime="2018-08-10T13:35:05.000Z" itemprop="datePublished">2018-08-10</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/08/10/webpack/">webpack</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="webpack-v4"><a href="#webpack-v4" class="headerlink" title="webpack(v4)"></a>webpack(v4)</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">webpack是1个静态资源打包器，它将项目中的每个资源视为1个模块，核心是根据依赖关系将项目中引用的所有模块生成依赖关系图，然后将依赖图中的所有模块打包为1个或多个bundle</span><br></pre></td></tr></table></figure>
+<h2 id="核心概念"><a href="#核心概念" class="headerlink" title="核心概念"></a>核心概念</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">webpack的核心概念包括entry、output、loader和plugin,devServer、mode、resolve、target等辅助使用</span><br></pre></td></tr></table></figure>
+<ul>
+<li>entry<br>配置入口文件，一般单页应用入口为1个</li>
+<li>output<br>配置打包后的bundle位置等多个属性</li>
+<li>loader<br>loader让webpack有了处理非js文件的能力，它将所有文件类型转为webpack能处理的模块  </li>
+<li>plugins<br>plugin用于执行宏观的任务，如整体打包过程中的压缩优化等 </li>
+<li>devServer<br>开发时的服务器配置</li>
+<li>mode<br>提供mode配置项，根据开发和生产环境webpack会进行相应的优化  </li>
+<li>resolve<br>配置模块如何解析，比如import lodash，resolve能够对webpack查找lodash的方式做修改  </li>
+<li>targets<br>因为js代码执行环境包含浏览器、服务器、桌面应用，所以webpack提供了多种构建目标,可以通过targets进行配置</li>
+<li>devTool<br>此选项对sourcemap进行配置，不同的值会影响构建速度；</li>
+<li>manifest<br>manifest.js是webpack在运行是解析模块的文件！</li>
+</ul>
+<h2 id="entry"><a href="#entry" class="headerlink" title="entry"></a>entry</h2><ul>
+<li><p>单入口<br>用法：<figure class="highlight plain"><figcaption><span>string|Array<string>``` 第二种写法是简写;  </string></span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">```javascript</span><br><span class="line">const config = &#123;</span><br><span class="line">    entry: &#123;</span><br><span class="line">        main: &apos;./path/to/my/entry/file.js&apos;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line">const config = &#123;</span><br><span class="line">    entry: &apos;./path/to/my/entry/file.js&apos;</span><br><span class="line">&#125;;</span><br><span class="line">当entry配置为字符串和数组时，此时打包后的文件名为main.js</span><br></pre></td></tr></table></figure></p>
+</li>
+<li><p>分离app和vender的对象写法<br>将entry配置为对象是常见的使用方式，可以分离类库文件和业务文件,这些依赖是完全分离的  </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">entry: &#123;</span><br><span class="line">    app: <span class="string">'./src/app.js'</span>,</span><br><span class="line">    vendors: <span class="string">'./src/vendors.js'</span></span><br><span class="line">&#125;</span><br><span class="line">当entry配置为对象时，打包后的文件的名称是key值，上述情况打包后的文件是app.js和vendors.js</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>多页应用<br>语法和对象写法一致：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> config = &#123;</span><br><span class="line">    entry: &#123;</span><br><span class="line">        pageOne: <span class="string">'./src/pageOne/index.js'</span>,</span><br><span class="line">        pageTwo: <span class="string">'./src/pageTwo/index.js'</span>,</span><br><span class="line">        pageThree: <span class="string">'./src/pageThree/index.js'</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>使用CommonsChunksPlugin可以为多页面共享代码创建bundle，从而复用代码;</p>
+</li>
+</ul>
+<h2 id="output"><a href="#output" class="headerlink" title="output"></a>output</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">控制webpack如何输出打包后的文件，输出配置只能指定1个，output位于配置对象的最顶级key，指导webpack如何去输出和去哪里输出bundle、asset和其他内容</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>基本使用<br>配置为对象，必须添加filename和path属性,指定打包后的bundle的名字和路径  </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> config = &#123;</span><br><span class="line">    output: &#123;</span><br><span class="line">        filename: <span class="string">'bundle.js'</span>,</span><br><span class="line">        path: <span class="string">'/home/proj/public/assets'</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>多页面<br>如果入口配置是对象式写法，那么需要使用占位符来确保每个文件有唯一的名称</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    entry: &#123;</span><br><span class="line">        app: <span class="string">'./src/app.js'</span>,</span><br><span class="line">        search: <span class="string">'./src/search.js'</span></span><br><span class="line">    &#125;,</span><br><span class="line">    output: &#123;</span><br><span class="line">        filename: <span class="string">'[name].js'</span>,</span><br><span class="line">        path: __dirname + <span class="string">'/dist'</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>此时app内添加的依赖打包为app.js，search内的依赖打包为search.js，输出目录为当前目录下的dist文件夹下  </p>
+</li>
+<li><p>特殊用法<br>以下实例为cdn和hash</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">output: &#123;</span><br><span class="line">    path: <span class="string">"/home/proj/cdn/assets/[hash]"</span>,</span><br><span class="line">    publicPath: <span class="string">"http://cdn.example.com/assets/[hash]/"</span></span><br><span class="line">&#125;</span><br><span class="line">[hash:<span class="number">16</span>]:表示构建过程中的hash值,默认为<span class="number">20</span>位，可以指定为<span class="number">16</span>位，chunkhash同理</span><br><span class="line">[id]:内部chunk的id</span><br><span class="line">[name]:多入口中表示每个入口的文件名称</span><br><span class="line">[chunkhash]:基于每个chunk内容的hash值</span><br><span class="line">如果要使用hash，推荐使用chunkhash，chunkhash是基于内容计算的hash值，将基础类库等变化少的使用chunkhash处理，可以最大化利用缓存效果，还要搭配插件进行配合使用，具体见[官方文档](https:<span class="comment">//www.webpackjs.com/guides/caching/)</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="mode"><a href="#mode" class="headerlink" title="mode"></a>mode</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">提供mode配置项，告知webpack进行相应的内置优化，值为string类型，可选值为production和development，配置后process.env.NODE_ENV会相应改变</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>区别</p>
+<ul>
+<li>develpment<br>process.env.NODE_ENV的值为development，启用NamedChunksPlugin和NamedModulesPlugin</li>
+<li>production<br>process.env.NODE_ENV的值为production,启用FlagDependencyUsagePlugin,FlagIncludedChunksPlugin,ModuleConcatenationPlugin,NoEmitOnErrorsPlugin,OccurrenceOrderPlugin,SideEffectsFlagPlugin和UglifyJsPlugin</li>
+</ul>
+</li>
+<li><p>基本使用  </p>
+<ul>
+<li><p>在配置中配置选项</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  mode: <span class="string">'production'</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在cli中使用参数传递<br>webpack –mode=production</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="loader"><a href="#loader" class="headerlink" title="loader"></a>loader</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">loader用于对模块的源代码进行转换，可以使你在import或加载时预处理文件，类似于其他工具中的task，即完成了模块化处理，有完成了异构语言的转换</span><br><span class="line">[官方文档](https://www.webpackjs.com/configuration/module/)</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>基本使用<br>有三种loader的使用方式，分别为配置式、内联式和cli式，内联式和cli式见文档，下面介绍配置式的基本使用</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"> <span class="built_in">module</span>: &#123;</span><br><span class="line">    rules: [</span><br><span class="line">        &#123;</span><br><span class="line">            test: <span class="regexp">/\.css$/</span>,</span><br><span class="line">            use: [</span><br><span class="line">                &#123;  </span><br><span class="line">                    loader: <span class="string">'style-loader'</span>  </span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    loader: <span class="string">'css-loader'</span>,</span><br><span class="line">                    options: &#123;</span><br><span class="line">                        modules: <span class="literal">true</span></span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            ]</span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>loader特性</p>
+<ol>
+<li>loader支持链式传递，能够对资源使用流水线，一组链式的loader按照相反的顺序执行</li>
+<li>loader接受查询参数(query)，可以对loader传递配置  </li>
+<li>loader也可以使用options对象进行配置，query是options的兼容写法</li>
+<li>loader为js提供了细粒度的逻辑控制</li>
+<li>更多特性参考官方文档，如编写和加载loader，同步异步处理  </li>
+</ol>
+</li>
+<li><p>常见的loader，更合理的分类见官网:<a href="https://www.webpackjs.com/loaders/" target="_blank" rel="noopener">loader分类</a>  </p>
+<ol>
+<li>jsx-loader、vue-loader、less-loader、sass-loader等异构语言</li>
+<li>css-loader、style-loader、url-loader等资源文件loader</li>
+<li>babel-loader，一般需要单独配置  </li>
+</ol>
+</li>
+</ul>
+<h2 id="plugins"><a href="#plugins" class="headerlink" title="plugins"></a>plugins</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">插件是1个具有apply属性的js对象，apply属性会被webpack compiler调用，并且compiler对象可在整个编译周期内访问；</span><br><span class="line">简单来说，loader是针对具体文件的预处理，插件的处理是针对整个编译周期的，插件的目的是在于解决loader处理不了的那些事</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>基本使用</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">plugins: [</span><br><span class="line">    生产环境常用：</span><br><span class="line">    <span class="comment">/* 混淆js */</span></span><br><span class="line">    <span class="keyword">new</span> webpack.optimize.UglifyJsPlugin(),</span><br><span class="line">    <span class="comment">/*  提取公共js*/</span></span><br><span class="line">    <span class="keyword">new</span> webpack.optimize.CommonsChunkPlugin(),</span><br><span class="line">    <span class="comment">/* 分离css文件同时添加hash等功能 */</span></span><br><span class="line">    <span class="keyword">new</span> ExtractTextPlugin(),</span><br><span class="line">    <span class="comment">/* 压缩css */</span></span><br><span class="line">    <span class="keyword">new</span> OptimizeCSSPlugin(),</span><br><span class="line">    测试环境常用：</span><br><span class="line">    <span class="comment">/* 模块热替换 */</span></span><br><span class="line">    <span class="keyword">new</span> webpack.HotModuleReplacementPlugin(),</span><br><span class="line">    <span class="comment">/* 显示模块相对路径 */</span></span><br><span class="line">    <span class="keyword">new</span> webpack.NamedModulesPlugin(),  </span><br><span class="line">    <span class="comment">/* webpack进程遇到错误不会终止 */</span></span><br><span class="line">    <span class="keyword">new</span> webpack.NoEmitOnErrorsPlugin(),  </span><br><span class="line">    公共配置：</span><br><span class="line">    <span class="comment">/* 注入模板，生产环境下启用压缩去空白等功能 */</span></span><br><span class="line">    <span class="keyword">new</span> HtmlWebpackPlugin(&#123;<span class="attr">template</span>: <span class="string">'./src/index.html'</span>&#125;),</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>常见插件:更多分类见<a href="https://www.webpackjs.com/plugins/" target="_blank" rel="noopener">官网地址</a></p>
+<ol>
+<li>HotModuleReplacementPlugin:启用模块热替换</li>
+<li>CommonsChunkPlugin:提取chunks之间的公用模块</li>
+<li>各种内置模块，以new Webpack.xx命名的内置模块  </li>
+</ol>
+</li>
+</ul>
+<h2 id="devServer"><a href="#devServer" class="headerlink" title="devServer"></a>devServer</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">devServer是开发中使用的server，部分选项只能通过cli来配置！只用于生产环境！  </span><br><span class="line">具体文档地址见 [devServer](https://www.webpackjs.com/configuration/dev-server/#devserver-host);  </span><br><span class="line">devServer中配置项很多，下面简单介绍常见的属性。  </span><br><span class="line">​```javascript</span><br><span class="line">devServer:&#123;</span><br><span class="line">    compress:true, //是否启用压缩</span><br><span class="line">    color:true , //控制台中彩色输出，只能在cli中使用：webpack-dev-server --color，在当前位置配置无效！</span><br><span class="line">    contentBase:false, //告诉服务器从哪里提供内容，默认为当前目录，使用false时禁用，常见值：path.join(__dirname, &quot;public&quot;)，</span><br><span class="line">    lazy:true, //启用惰性模式，不监视文件改动，请求时才编译</span><br><span class="line">    filename:&apos;&apos;, //在惰性模式下才生效，指定的文件发生变化时，才会重新编译</span><br><span class="line">    header:&#123;&#125;, //在所有的响应中添加首部内容</span><br><span class="line">    historyApiFallback:&#123;  //使用html5 historyAPI时，任意的404响应都被替换为index.html</span><br><span class="line">        rewrites: [&#123; from: /^\/$/, to: &apos;/views/landing.html&apos; &#125;, //使用rewrite时，按规则匹配</span><br><span class="line">        &#123; from: /./, to: &apos;/views/404.html&apos; &#125;]  //</span><br><span class="line">    &#125;,  </span><br><span class="line">    host:&apos;localhost&apos;, //指定host，默认为localhost</span><br><span class="line">    hot: true, //启用热替换  </span><br><span class="line">    open:true, //是否在浏览器中自动打开，如果需要指定浏览器，在命令行中添加参数：webpack-dev-server --open &apos;Google Chrome&apos;</span><br><span class="line">    openPage:&apos;/game/list&apos;, //指定打开的页面</span><br><span class="line">    overlay: true, //在浏览器中显示报错信息，默认为false</span><br><span class="line">    port:8080 , //指定要监听的端口号，</span><br><span class="line">    proxy:&#123;  //设置代理，具体见[文档](https://github.com/chimurai/http-proxy-middleware#options)</span><br><span class="line">        &apos;/api&apos;:&#123;  //</span><br><span class="line">            target:&apos;www.yourhost.com&apos;,  //目标host</span><br><span class="line">            pathRewrite:&#123;</span><br><span class="line">                &apos;^/api&apos;:&apos;/&apos;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    progress:true, //只能在命令行中使用，显示运行进度：webpack-dev-server --progress</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">​</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">## resolve</span><br></pre></td></tr></table></figure>
+<p>resolve配置如何解析模块，对查找模块的方式做出修改<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 基本使用</span><br><span class="line">  配置为对象，具体见[resolve文档](https://www.webpackjs.com/configuration/resolve/#resolve-modules)</span><br><span class="line"></span><br><span class="line">- 常见配置  </span><br><span class="line"></span><br><span class="line">  ```javascript  </span><br><span class="line">   resolve:&#123;</span><br><span class="line">        alias:&#123;</span><br><span class="line">            util:path.resolve(__dirname,&apos;src/lib/uitl/&apos;),  //改变util文件的引用位置，使用是imort uitl from &apos;util/uitls.js&apos;，即从指定的目录下查找</span><br><span class="line">        &#125;,</span><br><span class="line">        descriptionFiles: [&quot;package.json&quot;], //用于描述的json文件，默认为package.json</span><br><span class="line">        enforceExtension: false, //默认为false，设置为true时无法引用无后缀的文件，必须使用require(&apos;foo/foo.js&apos;)，添加后缀才能正常工作</span><br><span class="line">        extensions: [&quot;.js&quot;, &quot;.json&quot;], //自动解析确定的扩展，默认值为js和json，可以在使用时无需添加后缀，默认按照js和json的顺序查找，可以按需修改，但是数组中必须包含*的字符串</span><br><span class="line">        mainFields:[&quot;browser&quot;, &quot;module&quot;, &quot;main&quot;], //决定从npm导入包时的导入模块，当target属性设置为webworker、web和没有指定时的默认值，其他target则没有browser，当import xx from &apos;xx&apos;时，xx的package.json中包含了main/browser/module等字段，默认配置下使用的时browser模块，需要时特殊指定即可；</span><br><span class="line">        mainFiles:[&apos;index&apos;],  //解析目录时使用的文件名</span><br><span class="line">        modules:[&quot;node_modules&quot;],  //解析模块时应该搜索的目录，默认为node_modules,可以自定义添加，</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="targets"><a href="#targets" class="headerlink" title="targets"></a>targets</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">js的执行环境可能为浏览器、服务器、桌面应用等，根据具体执行环境来配置targets的值</span><br><span class="line">取值:string|function(compiler)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>string<ol>
+<li>web</li>
+<li>webworder</li>
+<li>node,此时可以使用require加载chunk  </li>
+<li>electron,编辑桌面应用相关</li>
+</ol>
+</li>
+<li>function<br>具体使用查看文档</li>
+</ul>
+<h2 id="devtool"><a href="#devtool" class="headerlink" title="devtool"></a>devtool</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">此选项控制是否生成sourcemap及如何生成sourcemap。在官网中有每种选项的例子:[example](https://github.com/webpack/webpack/tree/master/examples/source-map)</span><br><span class="line">对于开发环境和生产环境有如下的区分：</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>开发环境<br>eval:构建速度快，无法正确映射行数<br>eval-source-map:开发环境下的最佳选择，初始构建慢，后续快，能映射行数<br>cheap-eval-source-map:类似eval-source-map，但仅显示转译后代码<br>cheap-module-eval-source-map:类似上一个，只映射行数</p>
+</li>
+<li><p>生产环境<br>none:不生成sourcemap<br>hidden-source-map：只显示错误堆栈，不暴露sourcemap<br>nosources-source-map：显示错误堆栈，不显示源代码</p>
+<p>注意点：</p>
+</li>
+<li><p>和SourceMapDevToolPlugin/EvalSourceMapDevToolPlugin不能混合使用，这两个插件配置更加详细  </p>
+</li>
+<li><p>在生产环境下启用uglifyjs-webpack-plugin时，必须提供sourcemap：true来开启sourcemap的支持；</p>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/08/10/webpack/" data-id="cjko1c2kc0003wnrg9mcuihei" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/工具-webpack/">工具 webpack</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-cookie" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/07/26/cookie/" class="article-date">
@@ -110,7 +265,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/07/26/cookie/" data-id="cjk2oq5nq0000k8rgixlamswk" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/07/26/cookie/" data-id="cjko1c2k80001wnrg2g4r9s1t" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/http协议-cookie/">http协议 cookie</a></li></ul>
@@ -201,7 +356,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/07/26/移动端调试/" data-id="cjk2oq5o40008k8rgd59tjzhq" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/07/26/移动端调试/" data-id="cjko1c2kl000bwnrgu1ekz74u" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/移动端-调试工具/">移动端 调试工具</a></li></ul>
@@ -307,7 +462,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/07/26/移动端css技巧/" data-id="cjk2oq5o20005k8rgfyhlcto9" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/07/26/移动端css技巧/" data-id="cjko1c2kh0008wnrgl9z5wl7z" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/移动端-css/">移动端 css</a></li></ul>
@@ -402,7 +557,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/07/22/http缓存/" data-id="cjk2oq5nz0003k8rgbte3dfx4" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/07/22/http缓存/" data-id="cjko1c2k30000wnrg2v565b50" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/http协议-缓存/">http协议 缓存</a></li></ul>
@@ -920,7 +1075,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/07/16/前端知识图谱/" data-id="cjk2oq5o00004k8rgfom2j5ff" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/07/16/前端知识图谱/" data-id="cjko1c2kg0005wnrggckkkuqh" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前端-知识点总结/">前端 知识点总结</a></li></ul>
@@ -1073,7 +1228,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/07/16/读书笔记-操作系统-进程/" data-id="cjk2oq5o60009k8rg16s8xr30" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/07/16/读书笔记-操作系统-进程/" data-id="cjko1c2kj0009wnrgffhb1b5x" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/操作系统-进程和线程/">操作系统 进程和线程</a></li></ul>
@@ -1120,7 +1275,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/07/16/hello-world/" data-id="cjk2oq5nu0001k8rg45o09rkr" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/07/16/hello-world/" data-id="cjko1c2ke0004wnrgaaoyl8de" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1143,7 +1298,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/http协议-cookie/">http协议 cookie</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http协议-缓存/">http协议 缓存</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端-知识点总结/">前端 知识点总结</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/操作系统-进程和线程/">操作系统 进程和线程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/移动端-css/">移动端 css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/移动端-调试工具/">移动端 调试工具</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/http协议-cookie/">http协议 cookie</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http协议-缓存/">http协议 缓存</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端-知识点总结/">前端 知识点总结</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工具-webpack/">工具 webpack</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/操作系统-进程和线程/">操作系统 进程和线程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/移动端-css/">移动端 css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/移动端-调试工具/">移动端 调试工具</a></li></ul>
     </div>
   </div>
 
@@ -1153,7 +1308,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/http协议-cookie/" style="font-size: 10px;">http协议 cookie</a> <a href="/tags/http协议-缓存/" style="font-size: 10px;">http协议 缓存</a> <a href="/tags/前端-知识点总结/" style="font-size: 10px;">前端 知识点总结</a> <a href="/tags/操作系统-进程和线程/" style="font-size: 10px;">操作系统 进程和线程</a> <a href="/tags/移动端-css/" style="font-size: 10px;">移动端 css</a> <a href="/tags/移动端-调试工具/" style="font-size: 10px;">移动端 调试工具</a>
+      <a href="/tags/http协议-cookie/" style="font-size: 10px;">http协议 cookie</a> <a href="/tags/http协议-缓存/" style="font-size: 10px;">http协议 缓存</a> <a href="/tags/前端-知识点总结/" style="font-size: 10px;">前端 知识点总结</a> <a href="/tags/工具-webpack/" style="font-size: 10px;">工具 webpack</a> <a href="/tags/操作系统-进程和线程/" style="font-size: 10px;">操作系统 进程和线程</a> <a href="/tags/移动端-css/" style="font-size: 10px;">移动端 css</a> <a href="/tags/移动端-调试工具/" style="font-size: 10px;">移动端 调试工具</a>
     </div>
   </div>
 
@@ -1162,7 +1317,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a></li></ul>
     </div>
   </div>
 
@@ -1173,6 +1328,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2018/08/10/webpack/">webpack</a>
+          </li>
         
           <li>
             <a href="/2018/07/26/cookie/">cookie</a>
@@ -1188,10 +1347,6 @@
         
           <li>
             <a href="/2018/07/22/http缓存/">http缓存</a>
-          </li>
-        
-          <li>
-            <a href="/2018/07/16/前端知识图谱/">前端知识图谱</a>
           </li>
         
       </ul>
