@@ -7,18 +7,18 @@
   
   <title>进程和线程 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="进程和线程 ​    进程和线程是操作系统中最重要的概念，最近在看现代操作系统，做简单的学习笔记以加深理解，结合在线课程学习效果更佳！ ​    进程通信、饥渴、锁的内容随后单独介绍。 进程 基本概念  一个进程就是一个正在执行程序的实例，包括程序计数器、寄存器和变量的当前值 在多道程序设计中，进程提供了两个基本抽象： 独立的逻辑控制流，体现对cpu的抽象 私有的地址空间，体现对内存的抽象   个">
+  <meta name="description" content="进程和线程 ​    进程和线程是操作系统中最重要的概念，最近在看现代操作系统，做简单的学习笔记以加深理解，结合在线课程学习效果更佳！ ​    系统中断和进程并发控制相关内容随后补充 进程 基本概念  一个进程就是一个正在执行程序的实例，包括程序计数器、寄存器和变量的当前值 在多道程序设计中，进程提供了两个基本抽象： 独立的逻辑控制流，体现对cpu的抽象 私有的地址空间，体现对内存的抽象   个">
 <meta name="keywords" content="操作系统 进程和线程">
 <meta property="og:type" content="article">
 <meta property="og:title" content="进程和线程">
 <meta property="og:url" content="http://yoursite.com/2018/07/16/读书笔记-操作系统-进程/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="进程和线程 ​    进程和线程是操作系统中最重要的概念，最近在看现代操作系统，做简单的学习笔记以加深理解，结合在线课程学习效果更佳！ ​    进程通信、饥渴、锁的内容随后单独介绍。 进程 基本概念  一个进程就是一个正在执行程序的实例，包括程序计数器、寄存器和变量的当前值 在多道程序设计中，进程提供了两个基本抽象： 独立的逻辑控制流，体现对cpu的抽象 私有的地址空间，体现对内存的抽象   个">
+<meta property="og:description" content="进程和线程 ​    进程和线程是操作系统中最重要的概念，最近在看现代操作系统，做简单的学习笔记以加深理解，结合在线课程学习效果更佳！ ​    系统中断和进程并发控制相关内容随后补充 进程 基本概念  一个进程就是一个正在执行程序的实例，包括程序计数器、寄存器和变量的当前值 在多道程序设计中，进程提供了两个基本抽象： 独立的逻辑控制流，体现对cpu的抽象 私有的地址空间，体现对内存的抽象   个">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-07-26T15:12:44.437Z">
+<meta property="og:updated_time" content="2018-08-10T13:58:59.886Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="进程和线程">
-<meta name="twitter:description" content="进程和线程 ​    进程和线程是操作系统中最重要的概念，最近在看现代操作系统，做简单的学习笔记以加深理解，结合在线课程学习效果更佳！ ​    进程通信、饥渴、锁的内容随后单独介绍。 进程 基本概念  一个进程就是一个正在执行程序的实例，包括程序计数器、寄存器和变量的当前值 在多道程序设计中，进程提供了两个基本抽象： 独立的逻辑控制流，体现对cpu的抽象 私有的地址空间，体现对内存的抽象   个">
+<meta name="twitter:description" content="进程和线程 ​    进程和线程是操作系统中最重要的概念，最近在看现代操作系统，做简单的学习笔记以加深理解，结合在线课程学习效果更佳！ ​    系统中断和进程并发控制相关内容随后补充 进程 基本概念  一个进程就是一个正在执行程序的实例，包括程序计数器、寄存器和变量的当前值 在多道程序设计中，进程提供了两个基本抽象： 独立的逻辑控制流，体现对cpu的抽象 私有的地址空间，体现对内存的抽象   个">
   
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -89,7 +89,7 @@
       
         <p>进程和线程</p>
 <p>​    进程和线程是操作系统中最重要的概念，最近在看现代操作系统，做简单的学习笔记以加深理解，结合<a href="http://www.icourses.cn/web/sword/portal/shareDetails?&amp;cId=6151#/course/chapter" target="_blank" rel="noopener">在线课程</a>学习效果更佳！</p>
-<p>​    进程通信、饥渴、锁的内容随后单独介绍。</p>
+<p>​    系统中断和进程并发控制相关内容随后补充</p>
 <p>进程</p>
 <p>基本概念</p>
 <ul>
@@ -160,6 +160,7 @@
 </li>
 </ul>
 <p>进程调度算法</p>
+<p>​    根据系统分类和调度目标的不同，会使用不同的进程调度算法，并没有最优解。</p>
 <p>系统分类和调度目标</p>
 <ul>
 <li>批处理系统<ul>
@@ -180,7 +181,7 @@
 </li>
 </ul>
 <p>调度算法：</p>
-<p>实际中会各种调度算法搭配使用</p>
+<p>实际中会各种调度算法搭配使用，比较重要的是先来先服务和轮转调度及轮转调度算法的改进版。</p>
 <ul>
 <li>先来先服务  <ul>
 <li>按照请求cpu的顺序使用cpu</li>
