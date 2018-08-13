@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>读书笔记-操作系统-内存 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="存储管理​    存储管理是操作系统设计中的重要组成部分，在现有技术无法实现一块无限大无限快的永久存储的前提下，计算机大师们设计出了现有的分层存储体系，即由寄存器、多级cpu缓存、高速内存、硬盘组成的存储体系。 ​    在这个存储体系中，上一级比下一级更快更贵，都可以被认为是下一级的缓存，理解这个层次结构和相应特点对程序编写程序有巨大的影响！寄存器的指令执行是没有时延的，多级缓存约4-75个时钟">
+<meta name="keywords" content="操作系统 存储管理">
+<meta property="og:type" content="article">
+<meta property="og:title" content="读书笔记-操作系统-内存">
+<meta property="og:url" content="http://yoursite.com/2018/08/10/读书笔记-操作系统-内存/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="存储管理​    存储管理是操作系统设计中的重要组成部分，在现有技术无法实现一块无限大无限快的永久存储的前提下，计算机大师们设计出了现有的分层存储体系，即由寄存器、多级cpu缓存、高速内存、硬盘组成的存储体系。 ​    在这个存储体系中，上一级比下一级更快更贵，都可以被认为是下一级的缓存，理解这个层次结构和相应特点对程序编写程序有巨大的影响！寄存器的指令执行是没有时延的，多级缓存约4-75个时钟">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-08-13T15:59:20.843Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="读书笔记-操作系统-内存">
+<meta name="twitter:description" content="存储管理​    存储管理是操作系统设计中的重要组成部分，在现有技术无法实现一块无限大无限快的永久存储的前提下，计算机大师们设计出了现有的分层存储体系，即由寄存器、多级cpu缓存、高速内存、硬盘组成的存储体系。 ​    在这个存储体系中，上一级比下一级更快更贵，都可以被认为是下一级的缓存，理解这个层次结构和相应特点对程序编写程序有巨大的影响！寄存器的指令执行是没有时延的，多级缓存约4-75个时钟">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-读书笔记-操作系统-内存" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/08/10/读书笔记-操作系统-内存/" class="article-date">
+  <time datetime="2018-08-10T14:00:16.000Z" itemprop="datePublished">2018-08-10</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      读书笔记-操作系统-内存
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="存储管理"><a href="#存储管理" class="headerlink" title="存储管理"></a>存储管理</h1><p>​    存储管理是操作系统设计中的重要组成部分，在现有技术无法实现一块无限大无限快的永久存储的前提下，计算机大师们设计出了现有的分层存储体系，即由寄存器、多级cpu缓存、高速内存、硬盘组成的存储体系。</p>
+<p>​    在这个存储体系中，上一级比下一级更快更贵，都可以被认为是下一级的缓存，理解这个层次结构和相应特点对程序编写程序有巨大的影响！寄存器的指令执行是没有时延的，多级缓存约4-75个时钟周期，主存上有上百个，而如果在硬盘上，大约需要几千万个周期！因此可以看到高速内存的缓存命中是至关重要的！对于程序员的启示就是，要充分的利用计算机的局部性原理来写代码，充分的利用缓存来加快计算机的效果。</p>
+<p>​    存储管理从是否使用虚拟内存可以分为简单存储和虚拟存储；本文也将从这两个角度来简单的总结操作系统中的内存管理。需要说明的是，无论是简单存储还是虚拟存储，cpu使用的都是虚拟内存空间，虚拟内存空间本质是对物理内存的抽象，操作系统通过虚拟内存隔离了用户对真实物理空间的操作，cpu的寻址最终是通过cpu的内存管理单元来实现的，这里划分的虚拟存储强调的是在简单存储的基础上，操作系统过通过swapping技术来增加了可用内存空间，解决了大内存进程的问题。</p>
+<h2 id="简单存储"><a href="#简单存储" class="headerlink" title="简单存储"></a>简单存储</h2><p>​    简单存储体系是指在没有虚拟内存的概念下，计算机是如何进行内存管理的。没有虚拟内存的前提下，操作系统需要将进程的代码全部装入内存才能实现，这是以下技术必须要实现的。</p>
+<p>​    在没有虚拟内存的概念时，计算机大师提出了分区、分页和分段的技术，其中分区和分页技术侧重的是内存物理上的管理，分段是逻辑上的区分。</p>
+<p>​    要注意的是，各种技术都是有时代局限性的，都有相应的优点和缺点，也有针对之前技术的改进。技术是螺旋上升的，或许在不久的将来，我们又会回到简单存储方法上。</p>
+<h3 id="分区技术"><a href="#分区技术" class="headerlink" title="分区技术"></a>分区技术</h3><h4 id="固定分区"><a href="#固定分区" class="headerlink" title="固定分区"></a>固定分区</h4><p>​    系统在初始启动时将内存划分为数量固定和尺寸固定的多个分区，某些系统中分区尺寸可以不等，如256m内存分为32个8M的，或者x个8M+y个4M+z个2M的组合；</p>
+<p>​    当有新的进程进入内存时，按照内存空间大小装入对应的区域即可；</p>
+<ul>
+<li>优点<ul>
+<li>实现简单，系统开销小</li>
+</ul>
+</li>
+<li>缺点<ul>
+<li>存在内零头，如果有内存占用6M，装入8m的分区，那么剩下的2m也没用了</li>
+<li>尺寸固定，大程序是没有办法运行的</li>
+<li>数量固定，那么运行的内存是有数量限制的</li>
+</ul>
+</li>
+</ul>
+<h4 id="动态分区"><a href="#动态分区" class="headerlink" title="动态分区"></a>动态分区</h4><p>​    相比固定分区，内存划分的数量和尺寸都是不定的。当有新的进程装入内存时，根据内存需要动态分配即可</p>
+<ul>
+<li>优点<ul>
+<li>解决内零头的问题，</li>
+</ul>
+</li>
+<li>缺点<ul>
+<li>带来外零头的问题，系统运行一段时间后，空闲内存有20M，但是被分配到了多个区域，那么有20M的进程要进入内存时，空间是够得但是却无法使用</li>
+<li>解决上述问题可以使用紧凑技术，类似磁盘碎片整理，将外零头的内存合并为1个大空间。但是紧凑技术是非常消耗内存的！</li>
+</ul>
+</li>
+</ul>
+<h4 id="伙伴系统"><a href="#伙伴系统" class="headerlink" title="伙伴系统"></a>伙伴系统</h4><p>​    伙伴系统是为了解决动态系统外零头提出的方案。</p>
+<p>​    具体表现：将内存划分为2的n次方的空间，新进程进入内存时，根据大小选择适当的地方，如果没有合适空间，连续向上查找，满足后分解剩余空间；退出进程时，回收空间后和相邻内存空间进行连续合并至足够大即可；</p>
+<p>​    伙伴系统动态调整外零头，可以为大内存空间的进程提供空间。</p>
+<h3 id="分页技术"><a href="#分页技术" class="headerlink" title="分页技术"></a>分页技术</h3><p>​    分页技术是存储管理中最重要的概念之一。分页技术几乎解决了外零头，内零头大小可以忽略，是一套很好的方案。</p>
+<p>​    核心思路是将进程和内存划分为相等大小的空间，内存中的一份称为页框(frames)，进程中称为页帧(pages)，他们是一一对应的。操作系统将进程装入内存是，将页装入页框即可，可以连续/不连续，</p>
+<p>​    操作系统为每个进程维持一个页表，页表中记录了页号对应的页框号。操作系统在读取代码时获得页号和偏移量，由于页和页框是大小相等的，通过页表查询在内存中对应的页框号并加上偏移量，就可以获得真实地址。同时，操作系统还要维持一个空闲页表，每当有新进程需要内存时，通过空闲页表拿到空闲地址空间，进程退出时，释放相应内存，并更新空闲页表。</p>
+<p>​    进程页表存在于进程pcb中，为了加速寻址过程，系统会在页表寄存器中存储当前进程的页表地址，通过页表地址找到页表地址，通过进程页表查找到真实物理地址。由于页表是存在于内存中的，操作系统对内存的访问时间是大于缓存的，所以我们通过高速缓存来缓存真实物理地址，在操作系统寻址过程中会优先查找TLB，缓存命中则直接访问真实地址，未命中时流程不变，并更新TLB。充分的利用存储管理层次性和计算机系统的局部性，提高效率！</p>
+<p>​    需要特别说明的是，操作系统的寻址过程是由一个叫MMU的专用硬件来实现的。MMU位于cpu上，全名叫内存管理单元。</p>
+<p>​    同时需要注意的是，如何合理的选取页框的大小是个难题，页框小时，内零头小，但是页表项会很大；页框大，页表项小了但是内零头增大了。</p>
+<h3 id="分段技术"><a href="#分段技术" class="headerlink" title="分段技术"></a>分段技术</h3><p>​    类似于动态分区技术，根据用户代码的模块化来划分内存空间，分段具有很好的逻辑性，对程序员来说具有更好的可读性。</p>
+<p>​    缺点和分区是一致的，存在外零头和内存紧缩；优点则是具有很好的逻辑性，而且具有分段保护的机制，可以保护单个的进程。</p>
+<h3 id="段页式技术"><a href="#段页式技术" class="headerlink" title="段页式技术"></a>段页式技术</h3><h2 id="虚拟存储"><a href="#虚拟存储" class="headerlink" title="虚拟存储"></a>虚拟存储</h2><p>​    随着应用程序的逐渐增大，简单存储不能满足用户需求，虚拟存储是现行的对该问题的解决方案。进程并不是所有页面都都在内存中才能运行，比如在一个进程等待io的过程中，驻留在内存是无意义的，操作系统通过置换一部分不必要的内存空间到硬盘中，来增加内存空间；当cpu需要时，再将这部分放入内存，从而实现内存的最大化利用，同时解决了大内存进程的问题。</p>
+<p>​    同时，swapping技术也带了一些额外的修改和问题，主要体现在以下方面：</p>
+<h3 id="对分页系统的影响"><a href="#对分页系统的影响" class="headerlink" title="对分页系统的影响"></a>对分页系统的影响</h3><p>​    对分页系统来说，我们需要在页表中新增存在位和修改位；</p>
+<p>​    存在位用来表示要查找的物理地址是否位于内存中，如果不在内存，此时操作系统产生缺页中断，通过查找异常表的对应位置后，将需要的内存从硬盘中换入内存，完成swapping。</p>
+<p>​    修改位用来表示该页是否被修改过，当未修改时，可以直接用换入的新页面替换；如果发生过修改，那么需要重写硬盘中的数据。</p>
+<h3 id="缺页中断"><a href="#缺页中断" class="headerlink" title="缺页中断"></a>缺页中断</h3><p>​    在cpu寻址过程中，我们需要添加缺页中断的处理，该处理一般是操作系统来完成的。当cpu寻址时，如果不在内存时，产生缺页中断，这是操作系统需要选择一个牺牲页，将该页置换出内存，通过从硬盘中读入新页。异常中断的主要内容见异常介绍中。</p>
+<h3 id="内存置换算法"><a href="#内存置换算法" class="headerlink" title="内存置换算法"></a>内存置换算法</h3><p>​    内存置换算法描述了如何选择牺牲页。如果每次选取的都是将来要使用的页面，那么操作系统就会频繁的进行swapping， 这种现象称为抖动。所以合理的选择牺牲页会提升很大的性能，减少系统开销。</p>
+<p>​    最理想的算法是选择在不久的将来最晚被访问页面进行置换，这个算法称为最优页面置换算法，但是显然这个算法是无法实现的，我们无法预测操作系统接下来要使用的页面，只能尽可能的接近它。下文将介绍几个主要的算法，其中最重要的是工作集时钟算法。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/08/10/读书笔记-操作系统-内存/" data-id="cjksgrtiy00052trgfpnlvsc7" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/操作系统-存储管理/">操作系统 存储管理</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2018/08/10/webpack/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">webpack</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/http协议-cookie/">http协议 cookie</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http协议-缓存/">http协议 缓存</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端-知识点总结/">前端 知识点总结</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工具-webpack/">工具 webpack</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/操作系统-存储管理/">操作系统 存储管理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/操作系统-进程和线程/">操作系统 进程和线程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/移动端-css/">移动端 css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/移动端-调试工具/">移动端 调试工具</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/http协议-cookie/" style="font-size: 10px;">http协议 cookie</a> <a href="/tags/http协议-缓存/" style="font-size: 10px;">http协议 缓存</a> <a href="/tags/前端-知识点总结/" style="font-size: 10px;">前端 知识点总结</a> <a href="/tags/工具-webpack/" style="font-size: 10px;">工具 webpack</a> <a href="/tags/操作系统-存储管理/" style="font-size: 10px;">操作系统 存储管理</a> <a href="/tags/操作系统-进程和线程/" style="font-size: 10px;">操作系统 进程和线程</a> <a href="/tags/移动端-css/" style="font-size: 10px;">移动端 css</a> <a href="/tags/移动端-调试工具/" style="font-size: 10px;">移动端 调试工具</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/08/10/读书笔记-操作系统-内存/">读书笔记-操作系统-内存</a>
+          </li>
+        
+          <li>
+            <a href="/2018/08/10/webpack/">webpack</a>
+          </li>
+        
+          <li>
+            <a href="/2018/07/26/cookie/">cookie</a>
+          </li>
+        
+          <li>
+            <a href="/2018/07/26/移动端调试/">移动端调试</a>
+          </li>
+        
+          <li>
+            <a href="/2018/07/26/移动端css技巧/">移动端css技巧</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
