@@ -7,18 +7,18 @@
   
   <title>cookie | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="cookie简单介绍​    为什么介绍cookie？因为很多人在面试过程中，都会肯定的告诉我cookie是用来存数据的，感觉很多初学者都有一定的误区，所以翻了一篇去年的笔记出来，稍微改了一下介绍，就当复习吧；从另一个角度来说，cookie和缓存本来就是http协议中的重要部分，是一定要搞清楚的部分。 ​    cookie是1个请求首部，含有先前由服务器通过set-cookie首部投放并存储到客">
+  <meta name="description" content="cookie简单介绍​    为什么介绍cookie？因为很多人在面试过程中，都会肯定的告诉我cookie是用来存数据的，感觉很多初学者都有一定的误区，所以翻了一篇去年的笔记出来，稍微改了一下介绍，就当复习吧；从另一个角度来说，cookie和缓存本来就是http协议中的重要部分，是一定要搞清楚的部分。 ​">
 <meta name="keywords" content="http协议 cookie">
 <meta property="og:type" content="article">
 <meta property="og:title" content="cookie">
 <meta property="og:url" content="http://yoursite.com/2018/07/26/cookie/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="cookie简单介绍​    为什么介绍cookie？因为很多人在面试过程中，都会肯定的告诉我cookie是用来存数据的，感觉很多初学者都有一定的误区，所以翻了一篇去年的笔记出来，稍微改了一下介绍，就当复习吧；从另一个角度来说，cookie和缓存本来就是http协议中的重要部分，是一定要搞清楚的部分。 ​    cookie是1个请求首部，含有先前由服务器通过set-cookie首部投放并存储到客">
+<meta property="og:description" content="cookie简单介绍​    为什么介绍cookie？因为很多人在面试过程中，都会肯定的告诉我cookie是用来存数据的，感觉很多初学者都有一定的误区，所以翻了一篇去年的笔记出来，稍微改了一下介绍，就当复习吧；从另一个角度来说，cookie和缓存本来就是http协议中的重要部分，是一定要搞清楚的部分。 ​">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-07-26T15:12:13.355Z">
+<meta property="og:updated_time" content="2018-08-14T13:22:42.208Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="cookie">
-<meta name="twitter:description" content="cookie简单介绍​    为什么介绍cookie？因为很多人在面试过程中，都会肯定的告诉我cookie是用来存数据的，感觉很多初学者都有一定的误区，所以翻了一篇去年的笔记出来，稍微改了一下介绍，就当复习吧；从另一个角度来说，cookie和缓存本来就是http协议中的重要部分，是一定要搞清楚的部分。 ​    cookie是1个请求首部，含有先前由服务器通过set-cookie首部投放并存储到客">
+<meta name="twitter:description" content="cookie简单介绍​    为什么介绍cookie？因为很多人在面试过程中，都会肯定的告诉我cookie是用来存数据的，感觉很多初学者都有一定的误区，所以翻了一篇去年的笔记出来，稍微改了一下介绍，就当复习吧；从另一个角度来说，cookie和缓存本来就是http协议中的重要部分，是一定要搞清楚的部分。 ​">
   
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -88,6 +88,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="cookie"><a href="#cookie" class="headerlink" title="cookie"></a>cookie</h2><h4 id="简单介绍"><a href="#简单介绍" class="headerlink" title="简单介绍"></a>简单介绍</h4><p>​    为什么介绍cookie？因为很多人在面试过程中，都会肯定的告诉我cookie是用来存数据的，感觉很多初学者都有一定的误区，所以翻了一篇去年的笔记出来，稍微改了一下介绍，就当复习吧；从另一个角度来说，cookie和缓存本来就是http协议中的重要部分，是一定要搞清楚的部分。</p>
+<p>​    <a id="more"></a></p>
 <p>​    cookie是1个请求首部，含有先前由服务器通过set-cookie首部投放并存储到客户端的http cookies。在浏览器的隐私设置中可以禁用cookie。</p>
 <p>​    cookie的主要作用，或者说唯一的作用，就是标识用户。因为http协议是无状态的，并没有定义如何去标识用户，而客户端存储在html5中才被纳入标准，cookie就是对标识用户的一个折中方案。在这个方案中，服务器通过set-cookie的方式对客户端设置唯一的标识，而客户端在后续的请求中都会携带这个标识，通过这种方式实现了http协议的有状态。</p>
 <p>​    cookie本质是一个过渡方案，因为cookie伴随同域携带的特性，所以在当前域名存在很多的静态资源时，cookie其实是一种负担；而且server还要通过redis等存储cookie，也是额外的负担；而且cookie带来了csrf这种问题。个人观点是app端采用的token方案更合理。</p>

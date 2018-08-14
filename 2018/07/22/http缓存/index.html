@@ -7,18 +7,18 @@
   
   <title>http缓存 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1.简单介绍​    为什么要学习http缓存？看过很多前端优化的文章、例子和方案，总体来说从浏览器角度来讲，技术上能做的无非是资源的加载和渲染，而http缓存是优化资源加载中很重要的一点；另一方面来说，前端构建工具中的打包、chunkhash的处理，也要充分利用缓存的特性，减少请求次数； ​    在了解缓存之前，推荐先从缓存的局部性原理入手，了解操作系统的多级存储体系、TLB等知识，再回头来看">
+  <meta name="description" content="1.简单介绍​    为什么要学习http缓存？看过很多前端优化的文章、例子和方案，总体来说从浏览器角度来讲，技术上能做的无非是资源的加载和渲染，而http缓存是优化资源加载中很重要的一点；另一方面来说，前端构建工具中的打包、chunkhash的处理，也要充分利用缓存的特性，减少请求次数；">
 <meta name="keywords" content="http协议 缓存">
 <meta property="og:type" content="article">
 <meta property="og:title" content="http缓存">
 <meta property="og:url" content="http://yoursite.com/2018/07/22/http缓存/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="1.简单介绍​    为什么要学习http缓存？看过很多前端优化的文章、例子和方案，总体来说从浏览器角度来讲，技术上能做的无非是资源的加载和渲染，而http缓存是优化资源加载中很重要的一点；另一方面来说，前端构建工具中的打包、chunkhash的处理，也要充分利用缓存的特性，减少请求次数； ​    在了解缓存之前，推荐先从缓存的局部性原理入手，了解操作系统的多级存储体系、TLB等知识，再回头来看">
+<meta property="og:description" content="1.简单介绍​    为什么要学习http缓存？看过很多前端优化的文章、例子和方案，总体来说从浏览器角度来讲，技术上能做的无非是资源的加载和渲染，而http缓存是优化资源加载中很重要的一点；另一方面来说，前端构建工具中的打包、chunkhash的处理，也要充分利用缓存的特性，减少请求次数；">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-07-26T15:12:28.049Z">
+<meta property="og:updated_time" content="2018-08-14T13:14:46.787Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="http缓存">
-<meta name="twitter:description" content="1.简单介绍​    为什么要学习http缓存？看过很多前端优化的文章、例子和方案，总体来说从浏览器角度来讲，技术上能做的无非是资源的加载和渲染，而http缓存是优化资源加载中很重要的一点；另一方面来说，前端构建工具中的打包、chunkhash的处理，也要充分利用缓存的特性，减少请求次数； ​    在了解缓存之前，推荐先从缓存的局部性原理入手，了解操作系统的多级存储体系、TLB等知识，再回头来看">
+<meta name="twitter:description" content="1.简单介绍​    为什么要学习http缓存？看过很多前端优化的文章、例子和方案，总体来说从浏览器角度来讲，技术上能做的无非是资源的加载和渲染，而http缓存是优化资源加载中很重要的一点；另一方面来说，前端构建工具中的打包、chunkhash的处理，也要充分利用缓存的特性，减少请求次数；">
   
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -88,6 +88,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h4 id="1-简单介绍"><a href="#1-简单介绍" class="headerlink" title="1.简单介绍"></a>1.简单介绍</h4><p>​    为什么要学习http缓存？看过很多前端优化的文章、例子和方案，总体来说从浏览器角度来讲，技术上能做的无非是资源的加载和渲染，而http缓存是优化资源加载中很重要的一点；另一方面来说，前端构建工具中的打包、chunkhash的处理，也要充分利用缓存的特性，减少请求次数；</p>
+<a id="more"></a>
 <p>​    在了解缓存之前，推荐先从缓存的局部性原理入手，了解操作系统的多级存储体系、TLB等知识，再回头来看http缓存，会容易很多。</p>
 <p>​    http缓存可以分为强缓存和协商缓存，从请求资源的角度讲，可以分为以下几种情况：</p>
 <ul>

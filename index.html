@@ -129,7 +129,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="webpack-v4"><a href="#webpack-v4" class="headerlink" title="webpack(v4)"></a>webpack(v4)</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">webpack是1个静态资源打包器，它将项目中的每个资源视为1个模块，核心是根据依赖关系将项目中引用的所有模块生成依赖关系图，然后将依赖图中的所有模块打包为1个或多个bundle</span><br></pre></td></tr></table></figure>
+        <h1 id="webpack-v4"><a href="#webpack-v4" class="headerlink" title="webpack(v4)"></a>webpack(v4)</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">webpack是1个静态资源打包器，它将项目中的每个资源视为1个模块，核心是根据依赖关系将项目中引用的所有模块生成依赖关系图，然后将依赖图中的所有模块打包为1个或多个bundle</span><br><span class="line">&lt;!-- more --&gt;</span><br></pre></td></tr></table></figure>
 <h2 id="核心概念"><a href="#核心概念" class="headerlink" title="核心概念"></a>核心概念</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">webpack的核心概念包括entry、output、loader和plugin,devServer、mode、resolve、target等辅助使用</span><br></pre></td></tr></table></figure>
 <ul>
 <li>entry<br>配置入口文件，一般单页应用入口为1个</li>
@@ -285,28 +285,12 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="cookie"><a href="#cookie" class="headerlink" title="cookie"></a>cookie</h2><h4 id="简单介绍"><a href="#简单介绍" class="headerlink" title="简单介绍"></a>简单介绍</h4><p>​    为什么介绍cookie？因为很多人在面试过程中，都会肯定的告诉我cookie是用来存数据的，感觉很多初学者都有一定的误区，所以翻了一篇去年的笔记出来，稍微改了一下介绍，就当复习吧；从另一个角度来说，cookie和缓存本来就是http协议中的重要部分，是一定要搞清楚的部分。</p>
-<p>​    cookie是1个请求首部，含有先前由服务器通过set-cookie首部投放并存储到客户端的http cookies。在浏览器的隐私设置中可以禁用cookie。</p>
-<p>​    cookie的主要作用，或者说唯一的作用，就是标识用户。因为http协议是无状态的，并没有定义如何去标识用户，而客户端存储在html5中才被纳入标准，cookie就是对标识用户的一个折中方案。在这个方案中，服务器通过set-cookie的方式对客户端设置唯一的标识，而客户端在后续的请求中都会携带这个标识，通过这种方式实现了http协议的有状态。</p>
-<p>​    cookie本质是一个过渡方案，因为cookie伴随同域携带的特性，所以在当前域名存在很多的静态资源时，cookie其实是一种负担；而且server还要通过redis等存储cookie，也是额外的负担；而且cookie带来了csrf这种问题。个人观点是app端采用的token方案更合理。</p>
-<h4 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h4><p>cookie:name=value; name1=value1; name2=value2</p>
-<ul>
-<li>一系列的键值对，通过;和空格符隔开</li>
-<li>cookie的值必须不包含逗号，分号和空格符</li>
-</ul>
-<h4 id="浏览器api"><a href="#浏览器api" class="headerlink" title="浏览器api"></a>浏览器api</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">document.cookie = &apos;key=value&apos;;</span><br><span class="line">document.cookie = &apos;name=value&apos;;</span><br><span class="line">//此时的cookie为&apos;key=value; name=value&apos;</span><br></pre></td></tr></table></figure>
-<h4 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h4><ul>
-<li>path:决定cookie的路径，默认为当前</li>
-<li>domain：决定cookie的域名，默认为当前文档位置</li>
-<li>max-age：单位为s,表示以当前时间为基准的过期时间，设置为0则清除cookie</li>
-<li>expires：未设置时时临时cookie，设置后为持久cookie，是1个绝对时间单位，表示到期时间</li>
-<li>secure：只通过https协议传输</li>
-<li>httponly：只在http中携带，无法被js获取和修改</li>
-</ul>
-<h4 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h4><ul>
-<li>cookie一旦设置后只能通过设置有效期来清除cookie</li>
-<li>详细使用参考mdn即可</li>
-</ul>
-
+<p>​
+        
+          <p class="article-more-link">
+            <a href="/2018/07/26/cookie/#more">Read More</a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">
@@ -344,60 +328,14 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="移动端调试工具"><a href="#移动端调试工具" class="headerlink" title="移动端调试工具"></a>移动端调试工具</h1><p>​    本文将简单介绍几款移动端调试的工具，使用较为简单，都有可视化界面，就不详细展开了。</p>
-<h2 id="抓包工具"><a href="#抓包工具" class="headerlink" title="抓包工具"></a>抓包工具</h2><p>​    抓包工具是移动端调试的通用工具，不论是native还是H5均适用。常见的抓包工具有fiddler、charles，还有部分基于nodejs开发的跨平台的抓包工具。</p>
-<ul>
-<li>基本使用：<ul>
-<li>确保移动设备和pc在同一局域网，查看pc的ip地址和抓包工具的端口号  </li>
-<li>设置移动设备的代理地址  </li>
-<li>https需要额外安装证书  </li>
-</ul>
-</li>
-<li>过滤、限速<ul>
-<li>过滤查看对应抓包工具的fillter即可  </li>
-<li>限速相关查看throttling设置</li>
-</ul>
-</li>
-<li>其他<ul>
-<li>charles在windows和mac上均可使用，fiddler只有windows版本</li>
-</ul>
-</li>
-</ul>
-<h2 id="hybrid调试工具"><a href="#hybrid调试工具" class="headerlink" title="hybrid调试工具"></a>hybrid调试工具</h2><p>​    开发hybrid应用时，使用chorme调试更加方便，对比抓包工具来说，不知能查看网络相关，更有控制台、样式等，可以灵活调试；</p>
-<ul>
-<li>基本使用<ul>
-<li>android设置WebView.setWebContentsDebuggingEnabled(true);</li>
-<li>ios需要自己打包？</li>
-<li>连接手机，安装驱动，推荐各种国产工具</li>
-<li>chorme中打开inspect页面，推荐先打开设置，将settings替换为inspect即可，在列表中找到手机中的webview页面然后调试即可</li>
-</ul>
-</li>
-<li>一些问题<ul>
-<li>chorme://inpect需要翻墙工具  </li>
-<li>都需要app开发人员协作</li>
-<li>安卓根据版本不同，控制台存在差异</li>
-</ul>
-</li>
-</ul>
-<h2 id="浏览器调试工具"><a href="#浏览器调试工具" class="headerlink" title="浏览器调试工具"></a>浏览器调试工具</h2><p>​    相比hybridApp，移动端浏览器的调试要简单很多，主要涉及以下方面；  </p>
-<ul>
-<li><p>chorme调试  </p>
-<p>参考上面的hybridApp的调试，在手机中用chorme打开网页，在pc的chorme中打开inspect即可，比较鸡肋，一般chorme上的兼容性问题很少  </p>
-</li>
-<li><p>safari调试  </p>
-<p>用iphone连接Mac，在mac上打开safari，打开开发模式，在开发菜单中找到移动设备，打开对应的网页即可。safari调试非常方便，推荐前端项目组至少有一台mac  </p>
-</li>
-<li><p>国产UC浏览器  </p>
-<p>垃圾中的战斗机，移动端的ie，使用chorme内核非常老，兼容性问题非常多，不论是css还是js，但是用户多，说多了都是一脸泪。调试方法，去<a href="http://www.uc.cn/business/developer/" target="_blank" rel="noopener">uc官网</a>下载开发者版本即可，官网有详细的开发者版本的调试教程，内部控制台和chorme类似。  </p>
-</li>
-<li><p>国产X5内核浏览器  </p>
-<p>qq浏览器为代表的，用户很多。推荐官网的开发者版本，网址随后补充    </p>
-</li>
-<li><p>vConsole为代表的工具</p>
-<p>vConsole是腾讯前端团队的工具，如果上述的工具都无法使用，可以使用这一类工具，可以在移动端方便的查看到网络请求、控制台输出、页面dom文档。比较实用，需要在页面尽早的引入，通常可以配置为移动端测试环境下常驻</p>
-</li>
-</ul>
-
+        <h1 id="移动端调试工具"><a href="#移动端调试工具" class="headerlink" title="移动端调试工具"></a>移动端调试工具</h1><p>​    移动端页面，无论是h5网页，或是hybridApp，在当前都存在一定的兼容问题，在ios和安卓上表现不一致。对开发人员来说，不可能掌握所有的兼容性问题，所以如何调试移动端页面就很重要了。</p>
+<p>​    本文将简单介绍几款移动端调试的工具，让读者可以根据实际情况来灵活选择。</p>
+<p>​
+        
+          <p class="article-more-link">
+            <a href="/2018/07/26/移动端调试/#more">Read More</a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">
@@ -542,63 +480,11 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h4 id="1-简单介绍"><a href="#1-简单介绍" class="headerlink" title="1.简单介绍"></a>1.简单介绍</h4><p>​    为什么要学习http缓存？看过很多前端优化的文章、例子和方案，总体来说从浏览器角度来讲，技术上能做的无非是资源的加载和渲染，而http缓存是优化资源加载中很重要的一点；另一方面来说，前端构建工具中的打包、chunkhash的处理，也要充分利用缓存的特性，减少请求次数；</p>
-<p>​    在了解缓存之前，推荐先从缓存的局部性原理入手，了解操作系统的多级存储体系、TLB等知识，再回头来看http缓存，会容易很多。</p>
-<p>​    http缓存可以分为强缓存和协商缓存，从请求资源的角度讲，可以分为以下几种情况：</p>
-<ul>
-<li><p>前端利用本地存储，减少部分请求，如列表页缓存ajax请求、app端的增量更新</p>
-</li>
-<li><p>请求资源后被强缓存命中，如网站的静态资源</p>
-</li>
-<li><p>请求资源后命中协商缓存，若资源未过期则使用本地资源并更新日期，若过期则返回新的资源</p>
-</li>
-<li><p>使用no-cache，如网站中的html页面</p>
-<p>其中强缓存和协商缓存是做缓存优化的主要方面，下文会主要介绍这两点。</p>
-</li>
-</ul>
-<h4 id="2-http有关缓存字段"><a href="#2-http有关缓存字段" class="headerlink" title="2.http有关缓存字段"></a>2.http有关缓存字段</h4><ul>
-<li>cache-control:http协议中的通用请求头部，在请求报文和响应报文中均可使用，表示操作缓存的机制，在请求和响应中略有不同，常见取值如下：</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public:响应报文中常见，表示可以向任意方提供响应的缓存</span><br><span class="line">privite:仅向特定用户返回缓存</span><br><span class="line">no-cache:不缓存过期资源，并不是不缓存</span><br><span class="line">	1.请求报文中表示强制向服务器请求，类似浏览器刷新机制，不接受缓存服务器缓存过的响应</span><br><span class="line">	2.响应报文中表示缓存服务器不能缓存该资源，</span><br><span class="line">no-store:不缓存请求或响应中的任何资源</span><br><span class="line">max-age:资源缓存的最大时间，基于当前时间的以s未单位的相对时间</span><br></pre></td></tr></table></figure>
-<h4 id="3-强缓存"><a href="#3-强缓存" class="headerlink" title="3.强缓存"></a>3.强缓存</h4><p>表示缓存命中且未过期，此时不会重新发送网络请求</p>
-<ul>
-<li><p>Expires：实体首部字段</p>
-<p>http1.0的标准，值为1个utc标准的绝对时间(Date.toUTCString());</p>
-</li>
-<li><p>max-age</p>
-<p>http1.1的标准，值为1个以s为单位的相对时间</p>
-</li>
-<li><p>区别</p>
-<ul>
-<li>max-age优先级更高，二者同时存在以max-age为准</li>
-<li>时间单位不同</li>
-</ul>
-</li>
-</ul>
-<h4 id="4-协商缓存"><a href="#4-协商缓存" class="headerlink" title="4.协商缓存"></a>4.协商缓存</h4><p>表示缓存命中但过期了，需要重新发送请求向服务器确认，如果未修改，则返回304状态码，不用返回资源，浏览器使用缓存即可；如果此时资源已经变化，则返回新的资源，返回200状态码；</p>
-<ul>
-<li><p>if-modified-since ： 请求首部字段，用于确认资源有效期</p>
-<p>1.http1.0标准，值为utc时间</p>
-<p>2.Last-Modified是资源最后一次更改时间，获无期会在上一次请求资源时返回，在下一次加载资源的请求中，将该值放入If-Modified-Since中，服务器接收到请求后进行对比，根据结果返回304或新的资源</p>
-</li>
-<li><p>ETag ： 响应首部字段，以字符串性质为每个资源分配唯一标识，</p>
-<p>1.http1.1标准，资源发生更新时该值也会随之更新</p>
-<p>2.上一次加载资源时，服务器将该资源的ETag值返回作为标识，在下一次加载的资源的请求中，将该值放入If-None-Match中，服务器接收到if-None-Match的值后进行对比，然后根据对比结果返回304或新的资源</p>
-</li>
-<li><p>区别</p>
-<ul>
-<li>ETag优先级更高，二者同时存在以ETag值为准</li>
-</ul>
-</li>
-</ul>
-<h4 id="5-区别"><a href="#5-区别" class="headerlink" title="5.区别"></a>5.区别</h4><ul>
-<li>都表示缓存命中，强缓存未过期，协商缓存已过期</li>
-<li>强缓存不会发送网络请求，直接使用浏览器缓存，协商缓存会发送请求向服务器确认</li>
-</ul>
-<h4 id="6-怎么用"><a href="#6-怎么用" class="headerlink" title="6.怎么用"></a>6.怎么用</h4><ul>
-<li>在使用构建工具中，一般都会提取公用的基础库打包为vendor文件等，一般这些文件是长期稳定的，根据内容生成chunkhash后，可以设置较长的过期时间，避免用户的重复请求；</li>
-<li>网站的业务代码，一般根据页面单独打包，因为业务变动较大，可以每次构建后添加新的hash或根据内容生成新的hash</li>
-</ul>
-
+        
+          <p class="article-more-link">
+            <a href="/2018/07/22/http缓存/#more">Read More</a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">
@@ -637,7 +523,8 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>前端知识点考察</p>
-<pre><code>最近在面人帮公司招个前端小妹，面试之余感觉前端方向太杂，同是前端领域从事的工作内容还是差很多的，上周抽空写了前端知识点总结，概括了大概的知识点，在后面的工作中会慢慢完善它。总体来说，温故而知新还是很有必要的，毕竟作为面试官不能丢人啊，加油
+<pre><code>最近在面人帮公司招个前端小妹，面试之余感觉前端方向太杂，同是前端领域从事的工作内容还是差很多的，上周抽空写了前端知识点总结，概括了大概的知识点，在后面的工作中会慢慢完善它。总体来说，温故而知新还是很有必要的，毕竟作为面试官不能丢人啊，加油!
+&lt;!-- more --&gt;
 </code></pre><p>1.html</p>
 <p>2.css</p>
 <ul>
@@ -1156,121 +1043,12 @@
       
         <p>进程和线程</p>
 <p>​    进程和线程是操作系统中最重要的概念，最近在看现代操作系统，做简单的学习笔记以加深理解，结合<a href="http://www.icourses.cn/web/sword/portal/shareDetails?&amp;cId=6151#/course/chapter" target="_blank" rel="noopener">在线课程</a>学习效果更佳！</p>
-<p>​    系统中断和进程并发控制相关内容随后补充</p>
-<p>进程</p>
-<p>基本概念</p>
-<ul>
-<li>一个进程就是一个正在执行程序的实例，包括程序计数器、寄存器和变量的当前值</li>
-<li>在多道程序设计中，进程提供了两个基本抽象：<ul>
-<li>独立的逻辑控制流，体现对cpu的抽象</li>
-<li>私有的地址空间，体现对内存的抽象</li>
-</ul>
-</li>
-<li>个人理解:<ul>
-<li>操作系统的目的是最大化效益的资源管理，而通过进程的概念可以让我们最大的利用cpu，cpu的效率远大于内存和io设备，通过进程概念可以充分的利用cpu</li>
-<li>进程的本质就是享有独立内存空间的代码块，系统中断(与函数调用区分开)实现了进程的切换，通过保存上下文加系统调用的方式，可以实现并行，在任意的时间点只有一个当前进程</li>
-</ul>
-</li>
-</ul>
-<p>进程的状态和转换的原因</p>
-<p>挂起(suspend)</p>
-<p>​    suspend是基于swaping技术，根据进程是否被换出内存来决定，又可以分为ready-suspend和blocked-suspend</p>
-<p>三种状态</p>
-<ul>
-<li>就绪(ready)  <ul>
-<li>当前暂时没有cpu分配的进程  </li>
-<li>进程在内存，等待进程调度  </li>
-</ul>
-</li>
-<li>运行(running)  <ul>
-<li>进程调度后可能进入ready队列，退出进程，或由于内存等原因进入ready-suspend状态</li>
-</ul>
-</li>
-<li>阻塞(blocked)  <ul>
-<li>进程在内存  </li>
-<li>进程位于event队列，等待事件发生（如io操作等），事件发生后变为ready状态，加入ready队列</li>
-<li>可能存在多个event队列，可以更高效    </li>
-<li>移出内存变为blocked-suspend</li>
-</ul>
-</li>
-</ul>
-<p>五种状态</p>
-<ul>
-<li>开始  <ul>
-<li>新进程</li>
-<li>ready-suspend</li>
-</ul>
-</li>
-<li>退出(exit)</li>
-</ul>
-<p>七种状态</p>
-<ul>
-<li>Ready-suspend<ul>
-<li>进程在外存</li>
-<li>只要调入内存即可执行</li>
-<li>换入内存变为ready状态，</li>
-</ul>
-</li>
-<li>Blocked-suspend<ul>
-<li>进程在外存</li>
-<li>等待事件，事件发生变为ready-suspend，被换入内存变为blocked</li>
-</ul>
-</li>
-</ul>
-<p>线程</p>
-<ul>
-<li>基本概念<ul>
-<li>轻量级进程，多个进程共享cpu、io设备的，拥有自己的独立内存空间，而多个线程共享内存空间</li>
-<li>每个线程拥有自己的寄存器、堆栈空间</li>
-<li>线程不用切换上下文</li>
-</ul>
-</li>
-</ul>
-<p>进程调度算法</p>
-<p>​    根据系统分类和调度目标的不同，会使用不同的进程调度算法，并没有最优解。</p>
-<p>系统分类和调度目标</p>
-<ul>
-<li>批处理系统<ul>
-<li>吞吐量</li>
-<li>周转时间</li>
-<li>cpu利用率</li>
-</ul>
-</li>
-<li>分时系统<ul>
-<li>响应时间</li>
-<li>均衡性</li>
-</ul>
-</li>
-<li>实时系统<ul>
-<li>满足截止时间</li>
-<li>可预测性</li>
-</ul>
-</li>
-</ul>
-<p>调度算法：</p>
-<p>实际中会各种调度算法搭配使用，比较重要的是先来先服务和轮转调度及轮转调度算法的改进版。</p>
-<ul>
-<li>先来先服务  <ul>
-<li>按照请求cpu的顺序使用cpu</li>
-</ul>
-</li>
-<li>轮转调度<ul>
-<li>每个进程分配一个时间片，时间片结束后进程还在运行，就将cpu剥夺并分配给另一个进程，如果提前阻塞或结束，立即分配给下一个进程</li>
-<li>需要合理的分配时间片的长度，一般为20-50ms，太短需要频繁切换进程上下文，太长响应时间过长  </li>
-</ul>
-</li>
-<li>多级队列<ul>
-<li>轮转调度的改进版，不用估算进程使用cpu的时间也可以合理的分配时间片的长度</li>
-<li>使用多级队列，当前时间片未运行完毕的进程，移入下一级队列，下一级队列时间片长度翻倍；</li>
-</ul>
-</li>
-<li>优先级调度<ul>
-<li>设置多个优先级队列，优先运行优先级高的进程队列</li>
-<li>优先给更需要io的进程</li>
-</ul>
-</li>
-</ul>
-
+<p>​    系统中断和进程并发控制相关内容随后补充。</p>
+        
+          <p class="article-more-link">
+            <a href="/2018/07/16/读书笔记-操作系统-进程/#more">Read More</a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">
